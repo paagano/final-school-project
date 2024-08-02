@@ -10,3 +10,5 @@ const authSchema = Joi.object({
 });
 
 module.exports = { authSchema };
+
+//Validates all inputs
