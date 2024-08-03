@@ -1,8 +1,8 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/login/Login.jsx";
 import CreateUser from "./pages/register/CreateUser.jsx";
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard.jsx";
-import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/home/HomePage.jsx";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage.jsx";
 import Footer from "./pages/footer/Footer.jsx";
