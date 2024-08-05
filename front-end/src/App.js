@@ -7,6 +7,9 @@ import HomePage from "./pages/home/HomePage.jsx";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage.jsx";
 import Footer from "./pages/footer/Footer.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ListUsers from "./components/listUsers/ListUsers.jsx";
+// import "antd/dist/antd.css";
+import "antd/dist/reset.css";
 
 function App() {
   const route = createBrowserRouter([
@@ -37,6 +40,12 @@ function App() {
     {
       path: "/csms/login",
       element: <Login />,
+      errorElement: <NotFoundPage />,
+    },
+
+    {
+      path: "/csms/get-users",
+      element: <ListUsers />,
       errorElement: <NotFoundPage />,
     },
   ]);

@@ -1,7 +1,7 @@
 .addUser {
   width: 25%;
   margin: 50px auto;
-  background-color: white;
+  background-color: white; /*change to white White*/
   padding: 40px;
   border-radius: 10px;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
@@ -15,11 +15,13 @@
 
 .addUserForm .inputGroup label {
   margin-top: 10px;
+  color: gray; /*new*/
 }
 
 .addUserForm .inputGroup input {
   margin-top: 5px;
   padding: 10px;
+  color: gray; /*new*/
 }
 
 .addUserForm button {

@@ -45,7 +45,7 @@ const Login = () => {
         const { roleName } = res.data; // Assuming response has roleName
         roleName === "admin"
           ? navigate("/csms/admin-dashboard")
-          : navigate("/csms/create-user"); // To change later to standard user Dashboard:
+          : navigate("/csms/create-user"); // To change later to Standard User Dashboard:
       })
       .catch((err) => {
         toast.error("Invalid Username/Password", {
@@ -97,7 +97,7 @@ const Login = () => {
           {/* <p>Don't have account yet?</p> */}
           <p>Forgot Password?</p>
           <Link to="/csms/create-user" type="submit" class="btn btn-primary">
-            Reset Me
+            Reset
           </Link>
         </div>
       </div>

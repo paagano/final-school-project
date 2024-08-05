@@ -1,0 +1,23 @@
+.menu-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.admin-page {
+  width: 95%;
+  height: auto;
+  margin: 50px auto;
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+}
+
+.admin-dashboard-header {
+  background-color: grey;
+}
+.content-section {
+  width: 100%;
+  background-color: rgb(240, 240, 245);
+  color: darkgray;
+}
