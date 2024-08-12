@@ -4,7 +4,7 @@
 }
 
 .table {
-  width: 80%;
+  width: 40%;
   margin: 0 auto;
   border-collapse: collapse;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 1); /* Added box shadow */
@@ -29,6 +29,6 @@
   border: 1px solid #dddddd;
 }
 
-.users-list-header {
+.card-types-header {
   margin-top: 20px;
 }

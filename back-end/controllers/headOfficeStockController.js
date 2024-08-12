@@ -4,8 +4,8 @@ const createError = require("http-errors");
 const branchOrdersModel = require("../models/branchOrdersModel.js");
 
 //use the model
-const headOfficeStock = db.headOfficeStocks;
-const branchStock = db.branchStocks;
+const headOfficeStock = db.headofficestocks;
+const branchStock = db.branchstocks;
 
 module.exports = {
   headOfficeReceiveStock: async (req, res, next) => {

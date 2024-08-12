@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./listUsers.css";
+import "./listCardTypes.css";
 
 import axios from "axios";
 import { Dropdown, Navbar } from "react-bootstrap";
@@ -8,15 +8,15 @@ import { ToastContainer, toast } from "react-toastify";
 import NavBar from "../navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
-const ListUsers = () => {
-  const [users, setUsers] = useState([]);
+const ListCardTypes = () => {
+  const [cardTypes, setCardTypes] = useState([]);
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
     // const token = sessionStorage.getItem("accessToken")
 
     axios
-      .get("http://localhost:6008/api/users/", {
+      .get("http://localhost:6008/api/cards/", {
         // headers: {
         //     Authorization: Bearer ${token},
         //     'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const ListUsers = () => {
         // // withCredentials: true
       })
       .then((res) => {
-        setUsers(res.data);
+        setCardTypes(res.data);
       })
 
       .catch((err) => {
@@ -70,26 +70,18 @@ const ListUsers = () => {
           />
         )} */}
 
-        <h5 className="users-list-header"> All Users List</h5>
+        <h5 className="card-types-header"> All Card Types</h5>
         <div className="table-responsive">
           <table className="table table-bordered table-md">
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role Name</th>
-                <th>Branch Code</th>
+                <th>Card Type</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((r, i) => (
+              {cardTypes.map((r, i) => (
                 <tr key={i}>
-                  <td>{r.firstName}</td>
-                  <td>{r.lastName}</td>
-                  <td>{r.email}</td>
-                  <td>{r.roleName}</td>
-                  <td>{r.branchCode}</td>
+                  <td>{r.cardType}</td>
                   <td>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -105,20 +97,20 @@ const ListUsers = () => {
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            LoadVendor(r.userId);
+                            LoadVendor(r.cardId);
                           }}
                         >
                           Details
                         </Link>
                         <Link
-                          to="/UpdateUser"
+                          to="/UpdateCard"
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            loadEdit(r.userId);
+                            loadEdit(r.cardId);
                           }}
                         >
-                          Edit User
+                          Edit Card
                         </Link>
                         {/* <Link to="/delete" className="dropdown-item" onClick={(e) => { e.preventDefault(); LoadDelete(r.vendor_id)}}>
                                     Delete
@@ -137,6 +129,6 @@ const ListUsers = () => {
   );
 };
 
-export default ListUsers;
+export default ListCardTypes;
 
-// onClick={()=>loadEdit(r.userId)}
+// onClick={()=>loadEdit(r.cardId)}

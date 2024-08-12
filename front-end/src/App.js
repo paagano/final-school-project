@@ -6,8 +6,10 @@ import AdminDashboard from "./pages/adminDashboard/AdminDashboard.jsx";
 import HomePage from "./pages/home/HomePage.jsx";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage.jsx";
 import Footer from "./pages/footer/Footer.jsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ListUsers from "./components/listUsers/ListUsers.jsx";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ListCardTypes from "./components/listCardTypes/ListCardTypes.jsx";
+import Branches from "./components/branches/branches.jsx";
 // import "antd/dist/antd.css";
 import "antd/dist/reset.css";
 
@@ -46,6 +48,18 @@ function App() {
     {
       path: "/csms/get-users",
       element: <ListUsers />,
+      errorElement: <NotFoundPage />,
+    },
+
+    {
+      path: "/csms/get-card-types",
+      element: <ListCardTypes />,
+      errorElement: <NotFoundPage />,
+    },
+
+    {
+      path: "/csms/get-all-branches",
+      element: <Branches />,
       errorElement: <NotFoundPage />,
     },
   ]);
