@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./branches.css";
 
 import axios from "axios";
-import { Dropdown, Navbar } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { Dropdown } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
 import NavBar from "../navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
@@ -45,10 +45,10 @@ const Branches = () => {
     navigate("/StoreVendorDetails/" + id); // Change the route later
   };
 
-  const LoadDelete = (id) => {
-    // navigate("/api/measurement/" + id);
-    navigate("/DeleteStoreVendor/" + id); // Change the route later
-  };
+  // const LoadDelete = (id) => {
+  //   // navigate("/api/measurement/" + id);
+  //   navigate("/DeleteStoreVendor/" + id); // Change the route later
+  // };
 
   return (
     <div>

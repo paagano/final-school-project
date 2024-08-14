@@ -67,7 +67,9 @@ const Login = () => {
 
         <form onSubmit={loginUser} className="addUserForm">
           <div className="inputGroup">
-            <label htmlFor="email">Email</label>
+            <label className="em_label" htmlFor="email">
+              Email
+            </label>
             <input
               onChange={handleChange}
               type="email"
@@ -76,7 +78,9 @@ const Login = () => {
               autoComplete="off"
               placeholder="mtu-mzuri@csms.com"
             />
-            <label htmlFor="password">Password</label>
+            <label className="em_label" htmlFor="password">
+              Password
+            </label>
             <input
               onChange={handleChange}
               type="password"

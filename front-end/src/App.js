@@ -9,7 +9,9 @@ import Footer from "./pages/footer/Footer.jsx";
 import ListUsers from "./components/listUsers/ListUsers.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ListCardTypes from "./components/listCardTypes/ListCardTypes.jsx";
-import Branches from "./components/branches/branches.jsx";
+import Branches from "./components/branches/Branches.jsx";
+import CreateCardType from "./pages/cards/CreateCardType.jsx";
+import CreateBranch from "./components/branches/CreateBranch.jsx";
 // import "antd/dist/antd.css";
 import "antd/dist/reset.css";
 
@@ -60,6 +62,18 @@ function App() {
     {
       path: "/csms/get-all-branches",
       element: <Branches />,
+      errorElement: <NotFoundPage />,
+    },
+
+    {
+      path: "/csms/create-branch",
+      element: <CreateBranch />,
+      errorElement: <NotFoundPage />,
+    },
+
+    {
+      path: "/csms/create-card-type",
+      element: <CreateCardType />,
       errorElement: <NotFoundPage />,
     },
   ]);

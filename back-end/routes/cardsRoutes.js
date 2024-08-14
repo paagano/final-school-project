@@ -9,8 +9,8 @@ const routes = express.Router();
 //Route for adding or creating a new card:
 routes.post(
   "/create-card-type",
-  verifyAccessToken,
-  authController.restrict("admin"),
+  // verifyAccessToken,
+  // authController.restrict("admin"),
   CardsController.addCardType
 );
 

@@ -63,7 +63,9 @@ const CreateUser = () => {
 
         <form onSubmit={saveUser} className="addUserForm">
           <div className="inputGroup">
-            <label htmlFor="firstName">First Name</label>
+            <label className="em_label" htmlFor="firstName">
+              First Name
+            </label>
             <input
               onChange={handleChange}
               type="text"
@@ -73,7 +75,9 @@ const CreateUser = () => {
               placeholder="Mtu"
             />
 
-            <label htmlFor="lastName">Last Name</label>
+            <label className="em_label" htmlFor="lastName">
+              Last Name
+            </label>
             <input
               onChange={handleChange}
               type="text"
@@ -83,7 +87,9 @@ const CreateUser = () => {
               placeholder="Mzuri"
             />
 
-            <label htmlFor="email">Email</label>
+            <label className="em_label" htmlFor="email">
+              Email
+            </label>
             <input
               onChange={handleChange}
               type="email"
@@ -93,7 +99,9 @@ const CreateUser = () => {
               placeholder="mtu-mzuri@cms.com"
             />
 
-            <label htmlFor="password">Password</label>
+            <label className="em_label" htmlFor="password">
+              Password
+            </label>
             <input
               onChange={handleChange}
               type="password"
@@ -103,7 +111,9 @@ const CreateUser = () => {
               placeholder="******"
             />
 
-            <label htmlFor="branchCode">Branch Code</label>
+            <label className="em_label" htmlFor="branchCode">
+              Branch Code
+            </label>
             <input
               onChange={handleChange}
               type="text"
@@ -113,7 +123,9 @@ const CreateUser = () => {
               placeholder="1"
             />
 
-            <label htmlFor="roleName">Role</label>
+            <label className="em_label" htmlFor="roleName">
+              Role
+            </label>
             <input
               onChange={handleChange}
               type="text"

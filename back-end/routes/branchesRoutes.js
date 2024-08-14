@@ -9,8 +9,8 @@ const routes = express.Router();
 //Route for adding or creating a new branch:
 routes.post(
   "/create-branch",
-  verifyAccessToken,
-  authController.restrict("admin"),
+  // verifyAccessToken,
+  // authController.restrict("admin"),
   BranchesController.addBranch
 );
 
