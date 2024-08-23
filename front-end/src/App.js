@@ -7,13 +7,19 @@ import HomePage from "./pages/home/HomePage.jsx";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage.jsx";
 import Footer from "./pages/footer/Footer.jsx";
 import ListUsers from "./components/listUsers/ListUsers.jsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
 import ListCardTypes from "./components/listCardTypes/ListCardTypes.jsx";
 import Branches from "./components/branches/Branches.jsx";
 import CreateCardType from "./pages/cards/CreateCardType.jsx";
 import CreateBranch from "./components/branches/CreateBranch.jsx";
 // import "antd/dist/antd.css";
 import "antd/dist/reset.css";
+import { AuthProvider, useAuth } from "./components/auth.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -90,3 +96,22 @@ function App() {
 }
 
 export default App;
+
+// function App() {
+//   <AuthProvider>
+//     <Routes>
+//       <Route path="/csms/login" element={<Login />} />
+//       <Route path="/csms/home" element={<HomePage />} />
+//       <Route path="/csms/create-user" element={<CreateUser />} />
+//       <Route path="/csms/admin-dashboard" element={<AdminDashboard />} />
+//       <Route path="/csms/get-users" element={<ListUsers />} />
+//       <Route path="/csms/get-card-types" element={<ListCardTypes />} />
+//       <Route path="/csms/get-all-branches" element={<Branches />} />
+//       <Route path="/csms/create-branch" element={<CreateBranch />} />
+//       <Route path="/csms/create-card-type" element={<CreateCardType />} />
+//     </Routes>
+//
+//   </AuthProvider>;
+// }
+
+// export default App;

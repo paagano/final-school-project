@@ -28,7 +28,7 @@ const CreateBranch = () => {
     axios
       .post("http://localhost:6008/api/branches/create-branch", requestData, {
         //   headers: {
-        //   Authorization: `Bearer ${token}`,
+        //   Authorization: ` ${tBeareroken}`,
         //   "Content-Type": "application/json",
         // },
       })
