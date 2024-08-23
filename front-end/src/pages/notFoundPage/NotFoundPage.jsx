@@ -10,11 +10,11 @@ function NotFoundPage() {
     <>
       <NavBar />
 
-      <h1>Ooops! Page Not Found.</h1>
+      <h1>Oops! Page Not Found.</h1>
 
       <div>
         To Go Back Home, click{" "}
-        <Link to="/csms/home">
+        <Link to="/">
           <bold>HERE</bold>
         </Link>
       </div>

@@ -23,14 +23,8 @@ import { AuthProvider, useAuth } from "./components/auth.jsx";
 
 function App() {
   const route = createBrowserRouter([
-    // {
-    //   path: "/csms/not-found",
-    //   element: <NotFoundPage />,
-    //   errorElement: <NotFoundPage />,
-    // },
-
     {
-      path: "/csms/home",
+      path: "/",
       element: <HomePage />,
       errorElement: <NotFoundPage />,
     },

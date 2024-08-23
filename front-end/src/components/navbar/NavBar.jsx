@@ -10,11 +10,11 @@ export default function NavBar() {
       <div>
         <Navbar bg="primary" data-bs-theme="dark">
           <Container>
-            <Navbar.Brand as={Link} to="/csms/home">
+            <Navbar.Brand as={Link} to="/">
               <bold>CSMS |</bold> <small>Cards Stock Management System</small>
             </Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/csms/home">
+              <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
               <Nav.Link as={Link} to="/csms/login">
