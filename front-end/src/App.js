@@ -95,7 +95,7 @@ export default App;
 //   <AuthProvider>
 //     <Routes>
 //       <Route path="/csms/login" element={<Login />} />
-//       <Route path="/csms/home" element={<HomePage />} />
+//       <Route path="/" element={<HomePage />} />
 //       <Route path="/csms/create-user" element={<CreateUser />} />
 //       <Route path="/csms/admin-dashboard" element={<AdminDashboard />} />
 //       <Route path="/csms/get-users" element={<ListUsers />} />
