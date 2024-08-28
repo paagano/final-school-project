@@ -7,7 +7,7 @@ function HomePage() {
     <>
       <NavBar />
 
-      <header className="App-header">
+      <header className="App App-header">
         <h1>Welcome to Prepaid Cards Stock Management Portal</h1>
         <p>Manage Your Prepaid Card Stocks Efficiently and Effectively!</p>
       </header>
@@ -37,9 +37,15 @@ function HomePage() {
       <br />
       <hr />
       <br />
-      <Link as={Link} to="/csms/login" className="cta-button remove-underline">
-        Get Started
-      </Link>
+      <div className="App">
+        <Link
+          as={Link}
+          to="/csms/login"
+          className="cta-button remove-underline"
+        >
+          Get Started
+        </Link>
+      </div>
     </>
   );
 }

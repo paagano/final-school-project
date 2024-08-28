@@ -1,0 +1,12 @@
+.logout-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.logout-container h3 {
+  margin-bottom: 20px;
+}
+
+.logout-container .btn {
+  margin: 5px;
+}

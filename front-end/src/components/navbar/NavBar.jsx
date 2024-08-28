@@ -23,6 +23,9 @@ export default function NavBar() {
               <Nav.Link as={Link} to="/csms/create-user">
                 Register
               </Nav.Link>
+              <Nav.Link as={Link} to="/csms/log-out">
+                Logout
+              </Nav.Link>
             </Nav>
           </Container>
         </Navbar>

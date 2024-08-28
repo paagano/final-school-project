@@ -5,7 +5,6 @@ import {
   DashboardOutlined,
   HomeOutlined,
   PoweroffOutlined,
-  UnorderedListOutlined,
   UserAddOutlined,
   UserOutlined,
   UserDeleteOutlined,
@@ -59,7 +58,7 @@ function AdminDashboard() {
                       {
                         label: "Active Users",
                         icon: <UserOutlined />,
-                        key: "/csms/get-users/active-users",
+                        key: "/csms/get-users",
                       },
                       {
                         label: "Disabled Users",
@@ -77,7 +76,7 @@ function AdminDashboard() {
                   {
                     label: "Logout",
                     icon: <PoweroffOutlined />,
-                    key: "logout",
+                    key: "/csms/log-out",
                     danger: true,
                   },
                 ]}

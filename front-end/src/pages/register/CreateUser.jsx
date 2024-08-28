@@ -27,14 +27,14 @@ const CreateUser = () => {
 
     const requestData = { ...newFormValues };
 
-    // const token = sessionStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
 
     axios
       .post("http://localhost:6008/api/users/register", requestData, {
-        //   headers: {
-        //   Authorization: `Bearer ${token}`,
-        //   "Content-Type": "application/json",
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       })
 
       .then((res) => {

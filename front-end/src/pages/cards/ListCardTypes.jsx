@@ -5,7 +5,7 @@ import "./listCardTypes.css";
 import axios from "axios";
 import { Dropdown, Navbar } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import NavBar from "../navbar/NavBar";
+import NavBar from "../../components/navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
 const ListCardTypes = () => {

@@ -1,61 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/navbar/NavBar";
+import { AuthContext } from "../../components/auth";
 
 const Login = () => {
-  const credentials = {
+  // /****************START OLD CODE*****************/
+  // const credentials = {
+  //   email: "",
+  //   password: "",
+  // };
+
+  // const [userCredentials, setUserCredentials] = useState(credentials);
+  // const navigate = useNavigate(); // Initialize useNavigate
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setUserCredentials({ ...userCredentials, [name]: value });
+  // };
+
+  // const loginUser = (e) => {
+  //   e.preventDefault();
+
+  //   const requestData = { ...userCredentials };
+
+  //   // const token = sessionStorage.getItem("accessToken");
+
+  //   axios
+  //     .post("http://localhost:6008/api/users/login", requestData, {
+  //       //   headers: {
+  //       //   Authorization: `Bearer ${token}`,
+  //       //   "Content-Type": "application/json",
+  //       // },
+  //     })
+
+  //     .then((res) => {
+  //       toast.success("Login Successfull!", {
+  //         position: toast.POSITION.TOP_RIGHT,
+  //         autoClose: 3000,
+  //       });
+
+  //       // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to standard user Dashboard:
+  //       const { roleName } = res.data; // Assuming response has roleName
+  //       roleName === "admin"
+  //         ? navigate("/csms/admin-dashboard")
+  //         : navigate("/csms/create-user"); // To change later to Standard User Dashboard:
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Invalid Username/Password", {
+  //         position: toast.POSITION.TOP_RIGHT,
+  //         autoClose: 3000,
+  //       });
+  //     });
+
+  //   setUserCredentials(credentials);
+  //   console.log(requestData);
+  // };
+
+  // /****************END OLD CODE*****************/
+
+  const { login } = useContext(AuthContext);
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
-  };
-
-  const [userCredentials, setUserCredentials] = useState(credentials);
-  const navigate = useNavigate(); // Initialize useNavigate
+  });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserCredentials({ ...userCredentials, [name]: value });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const loginUser = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const requestData = { ...userCredentials };
-
-    // const token = sessionStorage.getItem("accessToken");
-
-    axios
-      .post("http://localhost:6008/api/users/login", requestData, {
-        //   headers: {
-        //   Authorization: `Bearer ${token}`,
-        //   "Content-Type": "application/json",
-        // },
-      })
-
-      .then((res) => {
-        toast.success("Login Successfull!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000,
-        });
-
-        // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to standard user Dashboard:
-        const { roleName } = res.data; // Assuming response has roleName
-        roleName === "admin"
-          ? navigate("/csms/admin-dashboard")
-          : navigate("/csms/create-user"); // To change later to Standard User Dashboard:
-      })
-      .catch((err) => {
-        toast.error("Invalid Username/Password", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000,
-        });
-      });
-
-    setUserCredentials(credentials);
-    console.log(requestData);
+    await login(credentials, () => {
+      navigate("/csms/admin-dashboard");
+    });
   };
 
   return (
@@ -65,7 +87,7 @@ const Login = () => {
       <div className="addUser">
         <h3>Login</h3>
 
-        <form onSubmit={loginUser} className="addUserForm">
+        <form onSubmit={handleSubmit} className="addUserForm">
           <div className="inputGroup">
             <label className="em_label" htmlFor="email">
               Email

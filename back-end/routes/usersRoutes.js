@@ -9,8 +9,8 @@ const routes = express.Router();
 // Register User:
 routes.post(
   "/register",
-  // verifyAccessToken,
-  // authController.restrict("admin"),
+  verifyAccessToken,
+  authController.restrict("admin"),
   UsersController.registerUser
 );
 
