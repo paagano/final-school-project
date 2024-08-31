@@ -1,36 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { Dropdown, Navbar } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./createUser.css";
-import NavBar from "../../components/navbar/NavBar";
+import NavBar from "../navbar/NavBar";
+import "./listUsers.css";
 
-const CreateUser = () => {
-  const initialFormValues = {
+export const UpdateUser = () => {
+  const {userId} = useParams();
+  const [newUserData, setNewUserData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     branchCode: "",
     roleName: "",
-  };
-
-  const [newFormValues, setNewFormValues] = useState(initialFormValues);
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewFormValues({ ...newFormValues, [name]: value });
+    setNewUserData({ ...newUserData, [name]: value });
   };
 
-  const saveUser = (e) => {
-    e.preventDefault();
-
-    const requestData = { ...newFormValues };
-
+  useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
 
     axios
-      .post("http://localhost:6008/api/users/register", requestData, {
+      .get(`http://localhost:6008/api/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -38,19 +35,51 @@ const CreateUser = () => {
       })
 
       .then((res) => {
-        toast.success("User Successfully Created!", {
+        setNewUserData({
+          firstName: res.newUserData.firstName,
+          lastName: res.newUserData.lastName,
+          email: res.newUserData.email,
+          password: res.newUserData.password,
+          branchCode: res.newUserData.branchCode,
+          roleName: res.newUserData.roleName,
+        });
+      })
+
+      .catch((err) => {
+        // if (err.response.status === 403) {
+        //   setUnauthorized(true);
+        // }
+      });
+  }, [userId]);
+
+  const saveUpdateUser = (e) => {
+    e.preventDefault();
+
+    const requestData = { ...newUserData };
+
+    const token = sessionStorage.getItem("accessToken");
+
+    axios
+      .patch(`http://localhost:6008/api/users/${userId}`, requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+
+      .then((res) => {
+        toast.success("User Successfully Updated!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       })
       .catch((err) => {
-        toast.error("An error occurred while registering user...", {
+        toast.error("An error occurred while updating user record...", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       });
 
-    setNewFormValues(initialFormValues);
     console.log(requestData);
   };
 
@@ -59,9 +88,9 @@ const CreateUser = () => {
       <NavBar />
 
       <div className="addUser">
-        <h3>Create User</h3>
+        <h3>Update User</h3>
 
-        <form onSubmit={saveUser} className="addUserForm">
+        <form onSubmit={saveUpdateUser} className="addUserForm">
           <div className="inputGroup">
             <label className="em_label" htmlFor="firstName">
               First Name
@@ -71,8 +100,8 @@ const CreateUser = () => {
               type="text"
               id="firstName"
               name="firstName"
+              value={newUserData.firstName}
               autoComplete="off"
-              placeholder="Mtu"
             />
 
             <label className="em_label" htmlFor="lastName">
@@ -83,8 +112,8 @@ const CreateUser = () => {
               type="text"
               id="lastName"
               name="lastName"
+              value={newUserData.lastName}
               autoComplete="off"
-              placeholder="Mzuri"
             />
 
             <label className="em_label" htmlFor="email">
@@ -95,8 +124,8 @@ const CreateUser = () => {
               type="email"
               id="email"
               name="email"
+              value={newUserData.email}
               autoComplete="off"
-              placeholder="mtu-mzuri@cms.com"
             />
 
             <label className="em_label" htmlFor="password">
@@ -107,8 +136,8 @@ const CreateUser = () => {
               type="password"
               id="password"
               name="password"
+              value={newUserData.password}
               autoComplete="off"
-              placeholder="******"
             />
 
             <label className="em_label" htmlFor="branchCode">
@@ -119,8 +148,8 @@ const CreateUser = () => {
               type="text"
               id="branchCode"
               name="branchCode"
+              value={newUserData.branchCode}
               autoComplete="off"
-              placeholder="1"
             />
 
             <label className="em_label" htmlFor="roleName">
@@ -131,12 +160,12 @@ const CreateUser = () => {
               type="text"
               id="roleName"
               name="roleName"
+              value={newUserData.roleName}
               autoComplete="off"
-              placeholder="admin"
             />
 
             <button type="submit" class="btn btn-success">
-              Create User
+              Update
             </button>
 
             <ToastContainer />
@@ -153,5 +182,3 @@ const CreateUser = () => {
     </>
   );
 };
-
-export default CreateUser;

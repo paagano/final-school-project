@@ -67,6 +67,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -75,8 +76,21 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const res = await axios.post(
+      "http://localhost:6008/api/users/login",
+      credentials
+    );
+
     await login(credentials, () => {
-      navigate("/csms/admin-dashboard");
+
+      // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to standard user Dashboard:
+      const { roleName } = res.data; // Assuming response has roleName
+      roleName === "admin"
+        ? navigate("/csms/admin-dashboard")
+        : navigate("/csms/create-user"); // To change later to Standard User Dashboard:
+
+      // navigate("/csms/admin-dashboard");
     });
   };
 

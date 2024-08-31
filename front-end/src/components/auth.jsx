@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 // Create the AuthContext
 export const AuthContext = createContext();
@@ -22,8 +23,17 @@ export const AuthProvider = ({ children }) => {
         sessionStorage.setItem("accessToken", token);
         onSuccess();
       }
-    } catch (error) {
-      console.error("Login failed:", error);
+
+      toast.success("Login Successfull!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+    } catch (err) {
+      toast.error("Invalid Username/Password", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+      });
+      console.error("Login failed:", err);
     } finally {
       setLoading(false);
     }
@@ -32,15 +42,20 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem("accessToken");
+
+    // Confirm removal
     console.log(
       "Token removed. Current token:",
       sessionStorage.getItem("accessToken")
-    ); // Confirm removal
+    );
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
-      {children}
-    </AuthContext.Provider>
+    <>
+      <AuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
+        {children}
+      </AuthContext.Provider>
+      <ToastContainer />
+    </>
   );
 };

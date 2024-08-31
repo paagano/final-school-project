@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./listUsers.css";
+import "./tills.css";
+
 import axios from "axios";
-import { Dropdown, Navbar } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { Dropdown } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
 import NavBar from "../navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
-const ListUsers = () => {
-  const [users, setUsers] = useState([]);
+const Tills = () => {
+  const [tills, setTills] = useState([]);
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
     // const token = sessionStorage.getItem("accessToken")
 
     axios
-      .get("http://localhost:6008/api/users/", {
+      .get("http://localhost:6008/api/tills", {
         // headers: {
         //     Authorization: Bearer ${token},
         //     'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ const ListUsers = () => {
         // // withCredentials: true
       })
       .then((res) => {
-        setUsers(res.data);
+        setTills(res.data);
       })
 
       .catch((err) => {
@@ -35,19 +36,19 @@ const ListUsers = () => {
 
   const navigate = useNavigate();
 
-  // const loadEdit = (userId) => {
-  //   navigate("/csms/update-user/" + userId);
-  // };
+  const loadEdit = (id) => {
+    navigate("/UpdateStoreVendor/" + id); // Change the route later
+  };
 
   const LoadVendor = (id) => {
     // navigate("/api/measurement/" + id);
     navigate("/StoreVendorDetails/" + id); // Change the route later
   };
 
-  const LoadDelete = (id) => {
-    // navigate("/api/measurement/" + id);
-    navigate("/DeleteStoreVendor/" + id); // Change the route later
-  };
+  // const LoadDelete = (id) => {
+  //   // navigate("/api/measurement/" + id);
+  //   navigate("/DeleteStoreVendor/" + id); // Change the route later
+  // };
 
   return (
     <div>
@@ -69,25 +70,19 @@ const ListUsers = () => {
           />
         )} */}
 
-        <h5 className="users-list-header"> All Users List</h5>
+        <h5 className="tills-list-header"> Tills List</h5>
         <div className="table-responsive">
           <table className="table table-bordered table-md">
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role Name</th>
+                <th>Till Number</th>
                 <th>Branch Code</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((r, i) => (
+              {tills.map((r, i) => (
                 <tr key={i}>
-                  <td>{r.firstName}</td>
-                  <td>{r.lastName}</td>
-                  <td>{r.email}</td>
-                  <td>{r.roleName}</td>
+                  <td>{r.tillNumber}</td>
                   <td>{r.branchCode}</td>
                   <td>
                     <Dropdown>
@@ -104,26 +99,21 @@ const ListUsers = () => {
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            LoadVendor(r.userId);
+                            LoadVendor(r.branchCode);
                           }}
                         >
                           Details
                         </Link>
-                        {/* <Link
-                          to="/csms/update-user/:userId"
+                        <Link
+                          to="/UpdateCard"
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            loadEdit(r.userId);
+                            loadEdit(r.branchCode);
                           }}
                         >
-                          Edit User
-                        </Link> */}
-
-                        <Link to={`/csms/update-user/${r.userId}`} className="dropdown-item">
-                          Edit User
+                          Edit Card
                         </Link>
-
                         {/* <Link to="/delete" className="dropdown-item" onClick={(e) => { e.preventDefault(); LoadDelete(r.vendor_id)}}>
                                     Delete
                                     </Link> */}
@@ -141,6 +131,6 @@ const ListUsers = () => {
   );
 };
 
-export default ListUsers;
+export default Tills;
 
-// onClick={()=>loadEdit(r.userId)}
+// onClick={()=>loadEdit(r.branchCode)}

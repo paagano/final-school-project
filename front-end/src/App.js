@@ -18,9 +18,12 @@ import ListCardTypes from "./pages/cards/ListCardTypes.jsx";
 import Branches from "./components/branches/Branches.jsx";
 import CreateCardType from "./pages/cards/CreateCardType.jsx";
 import CreateBranch from "./components/branches/CreateBranch.jsx";
+import Tills from "./components/tills/Tills.jsx";
+import CreateTill from "./components/tills/CreateTill.jsx";
 import Logout from "./pages/logout/Logout.jsx";
 import { AuthProvider, useAuth } from "./components/auth.jsx";
 import "antd/dist/reset.css";
+import { UpdateUser } from "./components/users/UpdateUser.jsx";
 // import "antd/dist/antd.css";
 
 function App() {
@@ -89,12 +92,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/csms/login" element={<Login />} />
         <Route path="/csms/create-user" element={<CreateUser />} />
+        <Route path="/csms/update-user/:userId" element={<UpdateUser />} />
         <Route path="/csms/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/csms/get-users" element={<ListUsers />} />
         <Route path="/csms/get-card-types" element={<ListCardTypes />} />
         <Route path="/csms/get-all-branches" element={<Branches />} />
         <Route path="/csms/create-branch" element={<CreateBranch />} />
         <Route path="/csms/create-card-type" element={<CreateCardType />} />
+        <Route path="/csms/create-till" element={<CreateTill />} />
+        <Route path="/csms/get-all-tills" element={<Tills />} />
         <Route path="/csms/log-out" element={<Logout />} />
 
         {/* Catch-all route for undefined paths */}

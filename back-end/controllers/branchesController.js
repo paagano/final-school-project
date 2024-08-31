@@ -16,6 +16,7 @@ module.exports = {
       const newBranch = await branches.create(info);
       res.status(200).send(newBranch);
     } catch (error) {
+      console.log(error);
       next(error);
     }
   },

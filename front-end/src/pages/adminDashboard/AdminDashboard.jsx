@@ -8,6 +8,12 @@ import {
   UserAddOutlined,
   UserOutlined,
   UserDeleteOutlined,
+  BranchesOutlined,
+  OrderedListOutlined,
+  AppstoreAddOutlined,
+  CreditCardOutlined,
+  CreditCardFilled,
+  AccountBookOutlined,
 } from "@ant-design/icons/lib/icons";
 
 // import "antd/dist/antd.css";
@@ -49,6 +55,57 @@ function AdminDashboard() {
                     label: "Dashboard",
                     icon: <DashboardOutlined />,
                     key: "/csms/admin-dashboard",
+                  },
+
+                  {
+                    label: "Branches",
+                    icon: <BranchesOutlined />,
+                    children: [
+                      {
+                        label: "List All Branches",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/get-all-branches",
+                      },
+                      {
+                        label: "Create New Branch",
+                        icon: <AppstoreAddOutlined />,
+                        key: "/csms/create-branch",
+                      },
+                    ],
+                  },
+
+                  {
+                    label: "Card Types",
+                    icon: <CreditCardOutlined />,
+                    children: [
+                      {
+                        label: "List Card Types",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/get-card-types",
+                      },
+                      {
+                        label: "Create Card Type",
+                        icon: <CreditCardFilled />,
+                        key: "/csms/create-card-type",
+                      },
+                    ],
+                  },
+
+                  {
+                    label: "Tills",
+                    icon: <AccountBookOutlined />,
+                    children: [
+                      {
+                        label: "Get All Tills",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/get-all-tills",
+                      },
+                      {
+                        label: "Create New Till",
+                        icon: <AccountBookOutlined />,
+                        key: "/csms/create-till",
+                      },
+                    ],
                   },
 
                   {
