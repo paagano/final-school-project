@@ -68,7 +68,7 @@ const CreateBranch = () => {
               id="branchName"
               name="branchName"
               autoComplete="off"
-              placeholder="Branch Name"
+              placeholder="e.g Nyali"
             />
 
             <label className="em_label" htmlFor="region">
@@ -80,11 +80,11 @@ const CreateBranch = () => {
               id="region"
               name="region"
               autoComplete="off"
-              placeholder="Coast"
+              placeholder="e.g. Coast"
             />
 
             <button type="submit" class="btn btn-success">
-              Create Branch
+              Create
             </button>
 
             <ToastContainer />

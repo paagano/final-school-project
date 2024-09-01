@@ -43,6 +43,11 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     sessionStorage.removeItem("accessToken");
 
+    toast.success("You have successfully logged out!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+    });
+
     // Confirm removal
     console.log(
       "Token removed. Current token:",

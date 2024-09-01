@@ -72,7 +72,7 @@ const CreateUser = () => {
               id="firstName"
               name="firstName"
               autoComplete="off"
-              placeholder="Mtu"
+              placeholder="e.g. Mtu"
             />
 
             <label className="em_label" htmlFor="lastName">
@@ -84,7 +84,7 @@ const CreateUser = () => {
               id="lastName"
               name="lastName"
               autoComplete="off"
-              placeholder="Mzuri"
+              placeholder="e.g. Mzuri"
             />
 
             <label className="em_label" htmlFor="email">
@@ -96,7 +96,7 @@ const CreateUser = () => {
               id="email"
               name="email"
               autoComplete="off"
-              placeholder="mtu-mzuri@cms.com"
+              placeholder="e.g. mtu-mzuri@cms.com"
             />
 
             <label className="em_label" htmlFor="password">
@@ -108,7 +108,7 @@ const CreateUser = () => {
               id="password"
               name="password"
               autoComplete="off"
-              placeholder="******"
+              placeholder="e.g. ******"
             />
 
             <label className="em_label" htmlFor="branchCode">
@@ -120,7 +120,7 @@ const CreateUser = () => {
               id="branchCode"
               name="branchCode"
               autoComplete="off"
-              placeholder="1"
+              placeholder="e.g. 1"
             />
 
             <label className="em_label" htmlFor="roleName">
@@ -132,7 +132,7 @@ const CreateUser = () => {
               id="roleName"
               name="roleName"
               autoComplete="off"
-              placeholder="admin"
+              placeholder="e.g. admin"
             />
 
             <button type="submit" class="btn btn-success">

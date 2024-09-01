@@ -24,6 +24,7 @@ import Logout from "./pages/logout/Logout.jsx";
 import { AuthProvider, useAuth } from "./components/auth.jsx";
 import "antd/dist/reset.css";
 import { UpdateUser } from "./components/users/UpdateUser.jsx";
+import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 // import "antd/dist/antd.css";
 
 function App() {
@@ -101,6 +102,7 @@ function App() {
         <Route path="/csms/create-card-type" element={<CreateCardType />} />
         <Route path="/csms/create-till" element={<CreateTill />} />
         <Route path="/csms/get-all-tills" element={<Tills />} />
+        <Route path="/csms/reset-password" element={<ResetPassword />} />
         <Route path="/csms/log-out" element={<Logout />} />
 
         {/* Catch-all route for undefined paths */}

@@ -22,14 +22,14 @@ const CreateCardType = () => {
 
     const requestData = { ...newFormValues };
 
-    // const token = sessionStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
 
     axios
       .post("http://localhost:6008/api/cards/create-card-type", requestData, {
-        //   headers: {
-        //   Authorization: `Bearer ${token}`,
-        //   "Content-Type": "application/json",
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       })
 
       .then((res) => {
@@ -67,11 +67,11 @@ const CreateCardType = () => {
               id="cardType"
               name="cardType"
               autoComplete="off"
-              placeholder="Test Card"
+              placeholder="e.g. Test Card"
             />
 
             <button type="submit" class="btn btn-success">
-              Create Card Type
+              Create
             </button>
 
             <ToastContainer />

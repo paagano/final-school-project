@@ -83,7 +83,6 @@ const Login = () => {
     );
 
     await login(credentials, () => {
-
       // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to standard user Dashboard:
       const { roleName } = res.data; // Assuming response has roleName
       roleName === "admin"
@@ -136,7 +135,7 @@ const Login = () => {
         <div className="login">
           {/* <p>Don't have account yet?</p> */}
           <p>Forgot Password?</p>
-          <Link to="/csms/create-user" type="submit" class="btn btn-primary">
+          <Link to="/csms/reset-password" type="submit" class="btn btn-primary">
             Reset
           </Link>
         </div>
