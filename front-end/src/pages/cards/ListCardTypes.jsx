@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./listCardTypes.css";
+import "./cards.css";
 
 import axios from "axios";
 import { Dropdown, Navbar } from "react-bootstrap";
@@ -13,15 +13,14 @@ const ListCardTypes = () => {
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
-    // const token = sessionStorage.getItem("accessToken")
+    const token = sessionStorage.getItem("accessToken");
 
     axios
       .get("http://localhost:6008/api/cards/", {
-        // headers: {
-        //     Authorization: Bearer ${token},
-        //     'Content-Type': 'application/json',
-        //   },
-        // // withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       })
       .then((res) => {
         setCardTypes(res.data);

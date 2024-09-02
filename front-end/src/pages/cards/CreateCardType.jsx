@@ -68,10 +68,11 @@ const CreateCardType = () => {
               name="cardType"
               autoComplete="off"
               placeholder="e.g. Test Card"
+              required
             />
 
             <button type="submit" class="btn btn-success">
-              Create
+              Save
             </button>
 
             <ToastContainer />

@@ -73,6 +73,7 @@ const CreateUser = () => {
               name="firstName"
               autoComplete="off"
               placeholder="e.g. Mtu"
+              required
             />
 
             <label className="em_label" htmlFor="lastName">
@@ -85,6 +86,7 @@ const CreateUser = () => {
               name="lastName"
               autoComplete="off"
               placeholder="e.g. Mzuri"
+              required
             />
 
             <label className="em_label" htmlFor="email">
@@ -97,6 +99,7 @@ const CreateUser = () => {
               name="email"
               autoComplete="off"
               placeholder="e.g. mtu-mzuri@cms.com"
+              required
             />
 
             <label className="em_label" htmlFor="password">
@@ -109,6 +112,7 @@ const CreateUser = () => {
               name="password"
               autoComplete="off"
               placeholder="e.g. ******"
+              required
             />
 
             <label className="em_label" htmlFor="branchCode">
@@ -121,6 +125,7 @@ const CreateUser = () => {
               name="branchCode"
               autoComplete="off"
               placeholder="e.g. 1"
+              required
             />
 
             <label className="em_label" htmlFor="roleName">
@@ -133,10 +138,11 @@ const CreateUser = () => {
               name="roleName"
               autoComplete="off"
               placeholder="e.g. admin"
+              required
             />
 
             <button type="submit" class="btn btn-success">
-              Create User
+              Save
             </button>
 
             <ToastContainer />

@@ -1,22 +1,21 @@
 import React from "react";
-import { Link, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavBar from "../../components/navbar/NavBar";
+import "./notFoundPage.css";
 
 function NotFoundPage() {
-  const error = useRouteError();
-  console.error(error);
-
   return (
     <>
       <NavBar />
-
-      <h1>Oops! Page Not Found.</h1>
-
-      <div>
-        To Go Back Home, click{" "}
-        <Link to="/">
-          <bold>HERE</bold>
-        </Link>
+      <div className="not-found-page">
+        {" "}
+        <h1>Oops! Page Not Found.</h1>
+        <div>
+          To Go Back Home, click{" "}
+          <Link to="/">
+            <bold>HERE</bold>
+          </Link>
+        </div>
       </div>
     </>
   );

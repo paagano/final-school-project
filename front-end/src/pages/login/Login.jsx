@@ -111,7 +111,7 @@ const Login = () => {
               id="email"
               name="email"
               autoComplete="off"
-              placeholder="mtu-mzuri@csms.com"
+              placeholder="e.g. mtu-mzuri@csms.com"
             />
             <label className="em_label" htmlFor="password">
               Password
@@ -122,7 +122,7 @@ const Login = () => {
               id="password"
               name="password"
               autoComplete="off"
-              placeholder="******"
+              placeholder="e.g. ******"
             />
             <button type="submit" class="btn btn-success">
               Login

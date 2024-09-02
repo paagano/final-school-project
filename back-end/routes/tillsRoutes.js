@@ -15,10 +15,10 @@ routes.post(
 );
 
 //Route for getting a single till record by id:
-routes.get("/get-till/:tillNumber", TillsController.getTill);
+routes.get("/get-till/:tillNumber", verifyAccessToken, TillsController.getTill);
 
 //Route for getting list of all tills
-routes.get("/", TillsController.getAllTills);
+routes.get("/", verifyAccessToken, TillsController.getAllTills);
 
 //Route for deleting a till:
 routes.delete(

@@ -15,10 +15,10 @@ routes.post(
 );
 
 //Route for getting a single role record by id:
-routes.get("/:roleId", RolesController.getRole);
+routes.get("/:roleId", verifyAccessToken, RolesController.getRole);
 
 //Route for getting list of all roles:
-routes.get("/", RolesController.getAllRoles);
+routes.get("/", verifyAccessToken, RolesController.getAllRoles);
 
 //Route for updating a role:
 routes.put(
@@ -34,7 +34,7 @@ routes.patch(
   RolesController.updateRole
 );
 
-//Route for deleting a card type:
+//Route for deleting a role:
 routes.delete(
   "/:roleId",
   verifyAccessToken,

@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./users.css";
+import "./roles.css";
+
 import axios from "axios";
 import { Dropdown, Navbar } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import NavBar from "../navbar/NavBar";
+import NavBar from "../../components/navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
-const ListUsers = () => {
-  const [users, setUsers] = useState([]);
+const ListRoles = () => {
+  const [roles, setRoles] = useState([]);
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
 
     axios
-      .get("http://localhost:6008/api/users/", {
+      .get("http://localhost:6008/api/roles", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        setUsers(res.data);
+        setRoles(res.data);
       })
 
       .catch((err) => {
@@ -34,16 +35,18 @@ const ListUsers = () => {
 
   const navigate = useNavigate();
 
-  const loadUserDetails = (userId) => {
-    navigate(`/csms/users/${userId}`);
+  const loadEdit = (id) => {
+    navigate("/UpdateStoreVendor/" + id); // Change the route later
   };
 
-  const loadEditUser = (userId) => {
-    navigate(`/csms/update-user/${userId}`);
+  const LoadVendor = (id) => {
+    // navigate("/api/measurement/" + id);
+    navigate("/StoreVendorDetails/" + id); // Change the route later
   };
 
-  const loadDeleteUser = (userId) => {
-    navigate(`/csms/delete-user/${userId}`);
+  const LoadDelete = (id) => {
+    // navigate("/api/measurement/" + id);
+    navigate("/DeleteStoreVendor/" + id); // Change the route later
   };
 
   return (
@@ -66,29 +69,18 @@ const ListUsers = () => {
           />
         )} */}
 
-        <h5 className="users-list-header"> All Users List</h5>
+        <h5 className="roles-list-header"> All Roles</h5>
         <div className="table-responsive">
           <table className="table table-bordered table-md">
             <thead>
               <tr>
-                <th>User ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
                 <th>Role Name</th>
-                <th>Branch Code</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((r, i) => (
+              {roles.map((r, i) => (
                 <tr key={i}>
-                  <td>{r.userId}</td>
-                  <td>{r.firstName}</td>
-                  <td>{r.lastName}</td>
-                  <td>{r.email}</td>
                   <td>{r.roleName}</td>
-                  <td>{r.branchCode}</td>
                   <td>
                     <Dropdown>
                       <Dropdown.Toggle
@@ -100,43 +92,28 @@ const ListUsers = () => {
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         <Link
-                          to={`/csms/users/${r.userId}`}
+                          to="/action-1"
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            loadUserDetails(r.userId);
+                            LoadVendor(r.cardId);
                           }}
                         >
                           Details
                         </Link>
                         <Link
-                          to={`/csms/update-user/${r.userId}`}
+                          to="/UpdateCard"
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            loadEditUser(r.userId);
+                            loadEdit(r.cardId);
                           }}
                         >
-                          Edit User
+                          Edit Role
                         </Link>
-
-                        <Link
-                          to={`/csms/delete-user/${r.userId}`}
-                          className="dropdown-item"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            loadDeleteUser(r.userId);
-                          }}
-                        >
-                          Delete User
-                        </Link>
-
-                        {/* <Link
-                          to={`/csms/delete-user/${r.userId}`}
-                          className="dropdown-item"
-                        >
-                          Delete User
-                        </Link> */}
+                        {/* <Link to="/delete" className="dropdown-item" onClick={(e) => { e.preventDefault(); LoadDelete(r.vendor_id)}}>
+                                    Delete
+                                    </Link> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   </td>
@@ -151,6 +128,6 @@ const ListUsers = () => {
   );
 };
 
-export default ListUsers;
+export default ListRoles;
 
-// onClick={()=>loadEdit(r.userId)}
+// onClick={()=>loadEdit(r.cardId)}

@@ -15,10 +15,10 @@ routes.post(
 );
 
 //Route for getting a single branch record by id:
-routes.get("/:branchCode", BranchesController.getBranch);
+routes.get("/:branchCode", verifyAccessToken, BranchesController.getBranch);
 
 //Route for getting list of all branches:
-routes.get("/", BranchesController.getAllBranches);
+routes.get("/", verifyAccessToken, BranchesController.getAllBranches);
 
 //Route for updating a branch:
 routes.put(

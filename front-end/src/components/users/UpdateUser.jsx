@@ -5,22 +5,22 @@ import axios from "axios";
 import { Dropdown, Navbar } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import NavBar from "../navbar/NavBar";
-import "./listUsers.css";
+import "./users.css";
 
 export const UpdateUser = () => {
-  const {userId} = useParams();
-  const [newUserData, setNewUserData] = useState({
+  const { userId } = useParams();
+  const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    // password: "",
     branchCode: "",
     roleName: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewUserData({ ...newUserData, [name]: value });
+    setUserData({ ...userData, [name]: value });
   };
 
   useEffect(() => {
@@ -33,39 +33,42 @@ export const UpdateUser = () => {
           "Content-Type": "application/json",
         },
       })
-
       .then((res) => {
-        setNewUserData({
-          firstName: res.newUserData.firstName,
-          lastName: res.newUserData.lastName,
-          email: res.newUserData.email,
-          password: res.newUserData.password,
-          branchCode: res.newUserData.branchCode,
-          roleName: res.newUserData.roleName,
+        // Assuming the user data is under res.data:
+        const currentUserData = res.data;
+        setUserData({
+          firstName: currentUserData.firstName,
+          lastName: currentUserData.lastName,
+          email: currentUserData.email,
+          // password: currentUserData.password,
+          branchCode: currentUserData.branchCode,
+          roleName: currentUserData.roleName,
         });
       })
-
       .catch((err) => {
-        // if (err.response.status === 403) {
-        //   setUnauthorized(true);
-        // }
+        console.error("Error fetching current user data:", err);
+        // Handle error (e.g., display an error message, redirect, etc.)
       });
   }, [userId]);
 
   const saveUpdateUser = (e) => {
     e.preventDefault();
 
-    const requestData = { ...newUserData };
+    const requestData = { ...userData };
 
     const token = sessionStorage.getItem("accessToken");
 
     axios
-      .patch(`http://localhost:6008/api/users/${userId}`, requestData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .patch(
+        `http://localhost:6008/api/users/update-user/${userId}`,
+        requestData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
 
       .then((res) => {
         toast.success("User Successfully Updated!", {
@@ -100,7 +103,7 @@ export const UpdateUser = () => {
               type="text"
               id="firstName"
               name="firstName"
-              value={newUserData.firstName}
+              value={userData.firstName}
               autoComplete="off"
             />
 
@@ -112,7 +115,7 @@ export const UpdateUser = () => {
               type="text"
               id="lastName"
               name="lastName"
-              value={newUserData.lastName}
+              value={userData.lastName}
               autoComplete="off"
             />
 
@@ -124,11 +127,11 @@ export const UpdateUser = () => {
               type="email"
               id="email"
               name="email"
-              value={newUserData.email}
+              value={userData.email}
               autoComplete="off"
             />
 
-            <label className="em_label" htmlFor="password">
+            {/* <label className="em_label" htmlFor="password">
               Password
             </label>
             <input
@@ -136,9 +139,9 @@ export const UpdateUser = () => {
               type="password"
               id="password"
               name="password"
-              value={newUserData.password}
+              value={userData.password}
               autoComplete="off"
-            />
+            /> */}
 
             <label className="em_label" htmlFor="branchCode">
               Branch Code
@@ -148,7 +151,7 @@ export const UpdateUser = () => {
               type="text"
               id="branchCode"
               name="branchCode"
-              value={newUserData.branchCode}
+              value={userData.branchCode}
               autoComplete="off"
             />
 
@@ -160,7 +163,7 @@ export const UpdateUser = () => {
               type="text"
               id="roleName"
               name="roleName"
-              value={newUserData.roleName}
+              value={userData.roleName}
               autoComplete="off"
             />
 

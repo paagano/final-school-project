@@ -18,7 +18,7 @@ routes.post(
 routes.get("/:cardId", verifyAccessToken, CardsController.getCardType);
 
 //Route for getting list of all card types:
-routes.get("/", CardsController.getAllCardTypes);
+routes.get("/", verifyAccessToken, CardsController.getAllCardTypes);
 
 //Route for updating a card type:
 routes.put(

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./tills.css";
+import "./roles.css";
 import NavBar from "../../components/navbar/NavBar";
 
-const CreateTill = () => {
+const CreateRole = () => {
   const initialFormValues = {
-    branchCode: "",
+    roleName: "",
   };
 
   const [newFormValues, setNewFormValues] = useState(initialFormValues);
@@ -17,7 +17,7 @@ const CreateTill = () => {
     setNewFormValues({ ...newFormValues, [name]: value });
   };
 
-  const saveTill = (e) => {
+  const saveRole = (e) => {
     e.preventDefault();
 
     const requestData = { ...newFormValues };
@@ -25,7 +25,7 @@ const CreateTill = () => {
     const token = sessionStorage.getItem("accessToken");
 
     axios
-      .post("http://localhost:6008/api/tills/create-till", requestData, {
+      .post("http://localhost:6008/api/roles/create-role", requestData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -33,13 +33,13 @@ const CreateTill = () => {
       })
 
       .then((res) => {
-        toast.success("Till Created Successfully!", {
+        toast.success("New Role Successfully Created!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       })
       .catch((err) => {
-        toast.error("An error occurred while creating a new Till...", {
+        toast.error("An error occurred while creating a new role...", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
@@ -53,21 +53,22 @@ const CreateTill = () => {
     <>
       <NavBar />
 
-      <div className="create-till">
-        <h3>Create New Till</h3>
+      <div className="create-role-header">
+        <h3>Create Role</h3>
 
-        <form onSubmit={saveTill} className="create-till-form">
+        <form onSubmit={saveRole} className="create-role-form">
           <div className="inputGroup">
-            <label className="em_label" htmlFor="branchCode">
-              Branch Code
+            <label className="em_label" htmlFor="roleName">
+              Role Name
             </label>
             <input
               onChange={handleChange}
               type="text"
-              id="branchCode"
-              name="branchCode"
+              id="roleName"
+              name="roleName"
               autoComplete="off"
-              placeholder="Branch Code"
+              placeholder="e.g. Admin"
+              required
             />
 
             <button type="submit" class="btn btn-success">
@@ -82,4 +83,4 @@ const CreateTill = () => {
   );
 };
 
-export default CreateTill;
+export default CreateRole;

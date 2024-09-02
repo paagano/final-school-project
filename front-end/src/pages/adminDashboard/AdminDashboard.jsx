@@ -14,6 +14,7 @@ import {
   CreditCardOutlined,
   CreditCardFilled,
   AccountBookOutlined,
+  RotateLeftOutlined,
 } from "@ant-design/icons/lib/icons";
 
 // import "antd/dist/antd.css";
@@ -131,9 +132,26 @@ function AdminDashboard() {
                   },
 
                   {
+                    label: "Roles",
+                    icon: <RotateLeftOutlined />,
+                    children: [
+                      {
+                        label: "List Roles",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/get-all-roles",
+                      },
+                      {
+                        label: "Create New Role",
+                        icon: <AppstoreAddOutlined />,
+                        key: "/csms/create-role",
+                      },
+                    ],
+                  },
+
+                  {
                     label: "Logout",
                     icon: <PoweroffOutlined />,
-                    key: "/csms/log-out",
+                    key: "/csms/logout",
                     danger: true,
                   },
                 ]}

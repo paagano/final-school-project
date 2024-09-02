@@ -21,7 +21,12 @@ routes.post("/login", UsersController.loginUser);
 routes.get("/:userId", verifyAccessToken, UsersController.getUser);
 
 //Route for getting list of all users:
-routes.get("/", UsersController.getAllUsers);
+routes.get(
+  "/",
+  verifyAccessToken,
+  authController.restrict("admin"),
+  UsersController.getAllUsers
+);
 
 //Route for updating a user:
 routes.put(

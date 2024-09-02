@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./users.css";
 import axios from "axios";
 import { Dropdown, Navbar } from "react-bootstrap";
@@ -7,43 +7,45 @@ import { ToastContainer, toast } from "react-toastify";
 import NavBar from "../navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
-const ListUsers = () => {
-  const [users, setUsers] = useState([]);
+const GetUserDetails = () => {
+  const { userId } = useParams();
+  const [userDetails, setUserDetails] = useState([]);
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
 
     axios
-      .get("http://localhost:6008/api/users/", {
+      .get(`http://localhost:6008/api/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        setUsers(res.data);
+        setUserDetails(res.data);
       })
 
       .catch((err) => {
-        // if (err.response.status === 403) {
-        //   setUnauthorized(true);
-        // }
+        console.error("Error fetching user data:", err);
+        // Handle error (e.g., display an error message, redirect, etc.)
       });
-  }, []);
+  }, [userId]);
 
   const navigate = useNavigate();
 
-  const loadUserDetails = (userId) => {
-    navigate(`/csms/users/${userId}`);
+  // const loadEdit = (userId) => {
+  //   navigate("/csms/update-user/" + userId);
+  // };
+
+  const LoadVendor = (id) => {
+    // navigate("/api/measurement/" + id);
+    navigate("/StoreVendorDetails/" + id); // Change the route later
   };
 
-  const loadEditUser = (userId) => {
-    navigate(`/csms/update-user/${userId}`);
-  };
-
-  const loadDeleteUser = (userId) => {
-    navigate(`/csms/delete-user/${userId}`);
+  const LoadDelete = (id) => {
+    // navigate("/api/measurement/" + id);
+    navigate("/DeleteStoreVendor/" + id); // Change the route later
   };
 
   return (
@@ -71,19 +73,16 @@ const ListUsers = () => {
           <table className="table table-bordered table-md">
             <thead>
               <tr>
-                <th>User ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Role Name</th>
                 <th>Branch Code</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((r, i) => (
+              {userDetails.map((r, i) => (
                 <tr key={i}>
-                  <td>{r.userId}</td>
                   <td>{r.firstName}</td>
                   <td>{r.lastName}</td>
                   <td>{r.email}</td>
@@ -100,43 +99,36 @@ const ListUsers = () => {
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         <Link
-                          to={`/csms/users/${r.userId}`}
+                          to="/action-1"
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            loadUserDetails(r.userId);
+                            LoadVendor(r.userId);
                           }}
                         >
                           Details
                         </Link>
-                        <Link
-                          to={`/csms/update-user/${r.userId}`}
+                        {/* <Link
+                          to="/csms/update-user/:userId"
                           className="dropdown-item"
                           onClick={(e) => {
                             e.preventDefault();
-                            loadEditUser(r.userId);
+                            loadEdit(r.userId);
                           }}
+                        >
+                          Edit User
+                        </Link> */}
+
+                        <Link
+                          to={`/csms/update-user/${r.userId}`}
+                          className="dropdown-item"
                         >
                           Edit User
                         </Link>
 
-                        <Link
-                          to={`/csms/delete-user/${r.userId}`}
-                          className="dropdown-item"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            loadDeleteUser(r.userId);
-                          }}
-                        >
-                          Delete User
-                        </Link>
-
-                        {/* <Link
-                          to={`/csms/delete-user/${r.userId}`}
-                          className="dropdown-item"
-                        >
-                          Delete User
-                        </Link> */}
+                        {/* <Link to="/delete" className="dropdown-item" onClick={(e) => { e.preventDefault(); LoadDelete(r.vendor_id)}}>
+                                    Delete
+                                    </Link> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   </td>
@@ -151,6 +143,6 @@ const ListUsers = () => {
   );
 };
 
-export default ListUsers;
+export default GetUserDetails;
 
 // onClick={()=>loadEdit(r.userId)}
