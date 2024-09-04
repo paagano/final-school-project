@@ -1,3 +1,4 @@
+/* Table Styles */
 .table-responsive {
   display: flex;
   justify-content: center;
@@ -34,7 +35,67 @@
   text-align: center;
 }
 
-/*CSS For Delete User Component*/
+/* Search Bar Styles */
+.search-bar {
+  width: 80%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.error-message-style {
+  color: darkred;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pagination li a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination .active a {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* CSS For Delete User Component */
 .delete-user {
   margin-top: 20px;
   display: flex;
@@ -53,3 +114,13 @@
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
+.download-buttons {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.download-buttons .btn {
+  margin-right: 10px;
+}
+

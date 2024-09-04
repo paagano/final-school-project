@@ -13,7 +13,7 @@ const Branches = () => {
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("accessToken")
+    const token = sessionStorage.getItem("accessToken");
 
     axios
       .get("http://localhost:6008/api/branches", {
@@ -74,13 +74,16 @@ const Branches = () => {
           <table className="table table-bordered table-md">
             <thead>
               <tr>
+                <th>Branch Code</th>
                 <th>Branch Name</th>
                 <th>Region</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {branches.map((r, i) => (
                 <tr key={i}>
+                  <td>{r.branchCode}</td>
                   <td>{r.branchName}</td>
                   <td>{r.region}</td>
                   <td>

@@ -75,6 +75,7 @@ const ListRoles = () => {
             <thead>
               <tr>
                 <th>Role Name</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

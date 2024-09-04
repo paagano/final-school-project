@@ -13,15 +13,14 @@ const Tills = () => {
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
-    // const token = sessionStorage.getItem("accessToken")
+    const token = sessionStorage.getItem("accessToken")
 
     axios
       .get("http://localhost:6008/api/tills", {
-        // headers: {
-        //     Authorization: Bearer ${token},
-        //     'Content-Type': 'application/json',
-        //   },
-        // // withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       })
       .then((res) => {
         setTills(res.data);
@@ -77,6 +76,7 @@ const Tills = () => {
               <tr>
                 <th>Till Number</th>
                 <th>Branch Code</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

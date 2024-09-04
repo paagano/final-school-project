@@ -20,13 +20,24 @@ module.exports = {
 
   //middleware to verify access token:
   verifyAccessToken: (req, res, next) => {
-    if (!req.headers["authorization"]) return next(creatError.Unauthorized());
+    if (!req.headers["authorization"])
+      return next(
+        createHttpError.Unauthorized(
+          "Unauthorized: No authorization token found"
+        )
+      );
+
     const authHeader = req.headers["authorization"];
-    const bearerToken = authHeader.split(" ");
-    const token = bearerToken[1];
+    const bearerToken = authHeader.split(" "); //will return an array with 2 items: "Bearer" and "the token"
+    const token = bearerToken[1]; // returns the token only, without the word "Bearer"
+
     JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
       if (err) {
-        return next(createHttpError.Unauthorized());
+        return next(
+          createHttpError.Unauthorized(
+            "Unauthorized: Kindly sign-in first to be able to perform this action"
+          )
+        );
       }
       req.payload = payload;
       next();
@@ -42,8 +53,8 @@ module.exports = {
         issuer: "AnayaTechnologies.com",
         audience: userId,
       };
-      JWT.sign(payload, secret, options, (error, token) => {
-        if (error) reject(error);
+      JWT.sign(payload, secret, options, (err, token) => {
+        if (err) reject(err);
         resolve(token);
       });
     });

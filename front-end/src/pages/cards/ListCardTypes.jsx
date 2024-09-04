@@ -75,6 +75,7 @@ const ListCardTypes = () => {
             <thead>
               <tr>
                 <th>Card Type</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
