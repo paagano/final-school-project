@@ -68,7 +68,7 @@ module.exports = {
         process.env.REFRESH_TOKEN_SECRET,
         (err, payload) => {
           if (err) return reject(createError.Unauthorized());
-          const userId = payload.aud;
+          const userId = payload.audience;
 
           resolve(userId);
         }
@@ -79,7 +79,7 @@ module.exports = {
   // Restricting resource access by role:
   restrict: (...allowedRoles) => {
     return (req, res, next) => {
-      const userRole = req.payload.role;
+      const userRole = req.payload.roleName;
 
       if (!userRole || !allowedRoles.includes(userRole)) {
         return next(

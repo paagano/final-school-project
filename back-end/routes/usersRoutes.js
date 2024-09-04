@@ -1,8 +1,8 @@
 const express = require("express");
 
 const UsersController = require("../controllers/usersController");
-const { verifyAccessToken } = require("../helpers/jwtHelpers");
-const authController = require("../helpers/jwtHelpers");
+const { verifyAccessToken } = require("../auth/jwtHelpers");
+const authController = require("../auth/jwtHelpers");
 
 const routes = express.Router();
 

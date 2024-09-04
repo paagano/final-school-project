@@ -1,7 +1,7 @@
 const express = require("express");
 
 const RolesController = require("../controllers/rolesController");
-const authController = require("../helpers/jwtHelpers");
+const authController = require("../auth/jwtHelpers");
 const { verifyAccessToken } = require("../auth/jwtHelpers");
 
 const routes = express.Router();
