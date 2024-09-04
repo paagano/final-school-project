@@ -2,7 +2,7 @@ const express = require("express");
 const authController = require("../helpers/jwtHelpers");
 
 const TillsController = require("../controllers/tillsController");
-const { verifyAccessToken } = require("../auth/jwthelpers");
+const { verifyAccessToken } = require("../auth/jwtHelpers");
 
 const routes = express.Router();
 

@@ -43,7 +43,15 @@ const ListUsers = () => {
       .catch((err) => {
         if (err.response.status === 401) {
           toast.success(
-            "Unauthorized: Kindly sign-in first to be able to perform this action",
+            "Kindly sign-in first to be able to perform this action",
+            {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000,
+            }
+          );
+        } else if (err.response.status === 403) {
+          toast.success(
+            "Sorry, you do not have permission to perform this action!",
             {
               position: toast.POSITION.TOP_RIGHT,
               autoClose: 3000,

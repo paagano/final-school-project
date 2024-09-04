@@ -1,7 +1,7 @@
 const db = require("../models/dbConnect");
 const createError = require("http-errors");
-const { signAccessToken } = require("../auth/jwthelpers");
-const { authSchema } = require("../helpers/validateSchema");
+const { signAccessToken } = require("../auth/jwtHelpers.js");
+const { authSchema } = require("../auth/validateSchema");
 
 //use the model:
 const users = db.users;
