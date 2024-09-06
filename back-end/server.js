@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const createError = require("http-errors");
+const morgan = require("morgan"); // Logging Middleware
 
 // Connecting to the GUI/Frontend:
 let corsOptions = {
@@ -31,6 +32,7 @@ const TillsRoutes = require("./routes/tillsRoutes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("combined")); // For enhanced logging
 
 //Using the routes:
 app.use("/api/cards", CardsRoutes);
@@ -60,7 +62,7 @@ app.use(async (req, res, next) => {
   next(createError.NotFound());
 });
 
-//Error Handler
+//Error Handlers:
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.send({
@@ -69,6 +71,11 @@ app.use((err, req, res, next) => {
       message: err.message,
     },
   });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log to console
+  res.status(500).send("Something went wrong!");
 });
 
 app.listen(PORT, serverPort);

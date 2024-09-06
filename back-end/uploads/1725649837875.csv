@@ -1,0 +1,4 @@
+firstName,lastName,email,password,roleName,branchCode
+Wan,Wan,wan@gmail.com,123456,admin,1
+Un,Un,un@gmail.com,123456,teller,8
+Gin,Gin,gin@gmail.com,123456,cso,2

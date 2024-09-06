@@ -29,6 +29,7 @@ import ListRoles from "./components/roles/ListRoles.jsx";
 import Branches from "./components/branches/Branches.jsx";
 import GetUserDetails from "./components/users/GetUserDetails.jsx";
 import DeleteUser from "./components/users/DeleteUser.jsx";
+import BulkUploadUsers from "./pages/register/BulkUploadUsers.jsx";
 // import "antd/dist/antd.css";
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/csms/login" element={<Login />} />
         <Route path="/csms/create-user" element={<CreateUser />} />
+        <Route path="/csms/bulk-create-users" element={<BulkUploadUsers />} />
         <Route path="/csms/update-user/:userId" element={<UpdateUser />} />
         <Route path="/csms/delete-user/:userId" element={<DeleteUser />} />
         <Route path="/csms/admin-dashboard" element={<AdminDashboard />} />

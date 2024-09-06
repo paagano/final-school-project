@@ -1,5 +1,10 @@
 const db = require("../models/dbConnect");
 const createError = require("http-errors");
+const upload = require("../configs/multerConfig.js");
+const path = require("path");
+const fs = require("fs");
+const csvParser = require("csv-parser");
+const { Parser } = require("json2csv"); // To convert JSON to CSV
 const { signAccessToken } = require("../auth/jwtHelpers.js");
 const { authSchema } = require("../auth/validateSchema");
 
@@ -7,7 +12,7 @@ const { authSchema } = require("../auth/validateSchema");
 const users = db.users;
 
 module.exports = {
-  // Register User:
+  // Register/Create Single User:
   registerUser: async (req, res, next) => {
     try {
       const { email, password, firstName, lastName, roleName, branchCode } =
@@ -126,6 +131,112 @@ module.exports = {
       }
     } catch (error) {
       next(error);
+    }
+  },
+
+  // Bulk Upload Users:
+  bulkUploadUsers: async (req, res, next) => {
+    try {
+      // Check if a file was uploaded
+      if (!req.file) {
+        throw createError.BadRequest("No file uploaded");
+      }
+
+      const filePath = path.normalize(req.file.path);
+      console.log("File uploaded successfully at path:", filePath);
+
+      const usersData = []; // Collect users data here
+
+      // Parse CSV file and accumulate rows
+      fs.createReadStream(filePath)
+        .pipe(csvParser())
+        .on("data", (row) => {
+          // Push row data into usersData for later processing
+          const user = {
+            firstName: row.firstName,
+            lastName: row.lastName,
+            email: row.email,
+            password: row.password,
+            roleName: row.roleName,
+            branchCode: row.branchCode,
+          };
+
+          usersData.push(user);
+        })
+        .on("end", async () => {
+          // At the end of parsing, validate and process users:
+          console.log("CSV file successfully read. Processing users...");
+
+          const validUsersData = [];
+
+          // Validate each user and check if they already exist:
+          for (const user of usersData) {
+            try {
+              await authSchema.validateAsync(user); // Validate user data
+              const userExists = await users.findOne({
+                where: { email: user.email },
+              });
+
+              if (!userExists) {
+                validUsersData.push(user); // Only add valid and non-existing users
+              }
+            } catch (error) {
+              console.error(`Error processing user: ${error.message}`);
+            }
+          }
+
+          // Debugging: Check the valid users before insertion
+          console.log(`Found ${validUsersData.length} valid users to upload.`);
+          console.log("Valid Users:", validUsersData);
+
+          // If no valid users are found, return an error response
+          if (validUsersData.length === 0) {
+            return res
+              .status(400)
+              .send({ message: "No valid users to upload." });
+          }
+
+          // Bulk insert valid users into the database:
+          try {
+            const savedUsers = await users.bulkCreate(validUsersData);
+            res.status(200).send({
+              message: `${savedUsers.length} users uploaded successfully!`,
+            });
+          } catch (bulkError) {
+            console.error(
+              "Error during bulk user creation:",
+              bulkError.message
+            );
+            next(bulkError);
+          } finally {
+            // Defining uploadsProcessedDir:
+            const uploadsProcessedDir = path.join(
+              __dirname,
+              "../uploads_processed"
+            );
+            const processedFilePath = path.join(
+              uploadsProcessedDir,
+              path.basename(filePath)
+            );
+            try {
+              // Move processed file from uploads/ to uploads_processed/
+              fs.renameSync(filePath, processedFilePath);
+              console.log(`File successfully moved to: ${processedFilePath}`);
+            } catch (err) {
+              console.error(
+                `Error moving file to uploads_processed/: ${err.message}`
+              );
+            }
+            // Safely delete the file using 'path':
+            // fs.unlinkSync(filePath);
+          }
+        })
+        .on("error", (err) => {
+          console.error("Error reading CSV file:", err.message);
+          next(err); // I will handle file reading errors here later
+        });
+    } catch (error) {
+      next(error); // Global error handling
     }
   },
 };

@@ -3,6 +3,7 @@ const express = require("express");
 const UsersController = require("../controllers/usersController");
 const { verifyAccessToken } = require("../auth/jwtHelpers");
 const authController = require("../auth/jwtHelpers");
+const upload = require("../configs/multerConfig");
 
 const routes = express.Router();
 
@@ -12,6 +13,15 @@ routes.post(
   verifyAccessToken,
   authController.restrict("admin"),
   UsersController.registerUser
+);
+
+// Bulk Create-Users route:
+routes.post(
+  "/bulk-upload-users",
+  verifyAccessToken,
+  authController.restrict("admin"),
+  upload.single("file"),
+  UsersController.bulkUploadUsers
 );
 
 // Login User:

@@ -42,7 +42,7 @@ const ListUsers = () => {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          toast.success(
+          toast.error(
             "Kindly sign-in first to be able to perform this action",
             {
               position: toast.POSITION.TOP_RIGHT,
@@ -50,7 +50,7 @@ const ListUsers = () => {
             }
           );
         } else if (err.response.status === 403) {
-          toast.success(
+          toast.error(
             "Sorry, you do not have permission to perform this action!",
             {
               position: toast.POSITION.TOP_RIGHT,
@@ -58,7 +58,7 @@ const ListUsers = () => {
             }
           );
         } else {
-          toast.success("Error fetching user list...", {
+          toast.error("Error fetching user list...", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
           });

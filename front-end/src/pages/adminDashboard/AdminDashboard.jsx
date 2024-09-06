@@ -124,9 +124,14 @@ function AdminDashboard() {
                         key: "/csms/get-users/disabled-users",
                       },
                       {
-                        label: "Create User",
+                        label: "Create Single User",
                         icon: <UserAddOutlined />,
                         key: "/csms/create-user",
+                      },
+                      {
+                        label: "Bulk Create Users",
+                        icon: <UserAddOutlined />,
+                        key: "/csms/bulk-create-users",
                       },
                     ],
                   },
