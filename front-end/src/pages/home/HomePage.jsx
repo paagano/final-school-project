@@ -3,6 +3,19 @@ import "./homePage.css";
 import NavBar from "../../components/navbar/NavBar";
 
 function HomePage() {
+  // Check if the user is logged in by checking the access token in session storage
+  const accessToken = sessionStorage.getItem("accessToken"); // token is stored in sessionStorage
+  const userRole = sessionStorage.getItem("role"); // role is stored as well
+
+  // Determine the link and text based on the access token and role
+  const getStartedLink = accessToken
+    ? userRole === "admin"
+      ? "/csms/admin-dashboard" // Redirect to Admin dashboard if user is Admin
+      : "/csms/user-dashboard" // Redirect to User dashboard if regular user
+    : "/csms/login"; // If no access token, go to login page
+
+  const getStartedButtonText = accessToken ? "Continue Working" : "Get Started";
+
   return (
     <>
       <NavBar />
@@ -38,12 +51,8 @@ function HomePage() {
       <hr />
       <br />
       <div className="App">
-        <Link
-          as={Link}
-          to="/csms/login"
-          className="cta-button remove-underline"
-        >
-          Get Started
+        <Link to={getStartedLink} className="cta-button remove-underline">
+          {getStartedButtonText}
         </Link>
       </div>
     </>

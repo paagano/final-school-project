@@ -51,7 +51,7 @@ const CreateCardType = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <div className="create-card-type">
         <h3>Create Card Type</h3>

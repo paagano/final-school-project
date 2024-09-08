@@ -18,9 +18,12 @@ export const AuthProvider = ({ children }) => {
       );
 
       const token = response.data.accessToken;
+
       if (typeof token === "string") {
         setIsAuthenticated(true);
         sessionStorage.setItem("accessToken", token);
+        // sessionStorage.setItem("email", credentials.email); // Storing email in local storage after login.
+        sessionStorage.setItem("role", response.data.roleName); // Storing email in local storage after login.
         onSuccess();
       }
 

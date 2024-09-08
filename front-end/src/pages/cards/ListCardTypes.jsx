@@ -51,7 +51,7 @@ const ListCardTypes = () => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
 
       {/* {unauthorized ? (
         <AuthorizationError />

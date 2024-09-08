@@ -257,7 +257,7 @@ const ListUsers = () => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <h5 className="users-list-header">All Users List</h5>
 

@@ -51,7 +51,7 @@ const CreateRole = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <div className="create-role-header">
         <h3>Create Role</h3>

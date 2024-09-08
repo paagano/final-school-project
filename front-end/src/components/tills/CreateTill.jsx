@@ -51,7 +51,7 @@ const CreateTill = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <div className="create-till">
         <h3>Create New Till</h3>
@@ -68,6 +68,7 @@ const CreateTill = () => {
               name="branchCode"
               autoComplete="off"
               placeholder="Branch Code"
+              required
             />
 
             <button type="submit" class="btn btn-success">

@@ -51,7 +51,7 @@ const ListRoles = () => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
 
       {/* {unauthorized ? (
         <AuthorizationError />

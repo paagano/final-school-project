@@ -7,7 +7,7 @@ function Footer() {
     <>
       <footer className="footer-style">
         <p className="text-tyle">
-          &copy; {currentYear} Agano Technologies Inc. All rights reserved.
+          &copy; {currentYear} Agano Technologies Inc. All Rights Reserved.
         </p>
       </footer>
     </>

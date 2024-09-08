@@ -8,60 +8,6 @@ import NavBar from "../../components/navbar/NavBar";
 import { AuthContext } from "../../components/auth";
 
 const Login = () => {
-  // /****************START OLD CODE*****************/
-  // const credentials = {
-  //   email: "",
-  //   password: "",
-  // };
-
-  // const [userCredentials, setUserCredentials] = useState(credentials);
-  // const navigate = useNavigate(); // Initialize useNavigate
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setUserCredentials({ ...userCredentials, [name]: value });
-  // };
-
-  // const loginUser = (e) => {
-  //   e.preventDefault();
-
-  //   const requestData = { ...userCredentials };
-
-  //   // const token = sessionStorage.getItem("accessToken");
-
-  //   axios
-  //     .post("http://localhost:6008/api/users/login", requestData, {
-  //       //   headers: {
-  //       //   Authorization: `Bearer ${token}`,
-  //       //   "Content-Type": "application/json",
-  //       // },
-  //     })
-
-  //     .then((res) => {
-  //       toast.success("Login Successfull!", {
-  //         position: toast.POSITION.TOP_RIGHT,
-  //         autoClose: 3000,
-  //       });
-
-  //       // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to standard user Dashboard:
-  //       const { roleName } = res.data; // Assuming response has roleName
-  //       roleName === "admin"
-  //         ? navigate("/csms/admin-dashboard")
-  //         : navigate("/csms/create-user"); // To change later to Standard User Dashboard:
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Invalid Username/Password", {
-  //         position: toast.POSITION.TOP_RIGHT,
-  //         autoClose: 3000,
-  //       });
-  //     });
-
-  //   setUserCredentials(credentials);
-  //   console.log(requestData);
-  // };
-
-  // /****************END OLD CODE*****************/
-
   const { login } = useContext(AuthContext);
   const [credentials, setCredentials] = useState({
     email: "",
@@ -87,7 +33,7 @@ const Login = () => {
       const { roleName } = res.data; // Assuming response has roleName
       roleName === "admin"
         ? navigate("/csms/admin-dashboard")
-        : navigate("/csms/create-user"); // To change later to Standard User Dashboard:
+        : navigate("/csms/user-dashboard");
 
       // navigate("/csms/admin-dashboard");
     });

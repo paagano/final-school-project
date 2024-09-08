@@ -6,12 +6,12 @@ import "./notFoundPage.css";
 function NotFoundPage() {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="not-found-page">
         {" "}
         <h1>Oops! Page Not Found.</h1>
         <div>
-          To Go Back Home, click{" "}
+          To Go Back to Home Page, click{" "}
           <Link to="/">
             <bold>HERE</bold>
           </Link>

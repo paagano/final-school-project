@@ -52,7 +52,7 @@ const CreateBranch = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <div className="create-branch">
         <h3>Create New Branch</h3>

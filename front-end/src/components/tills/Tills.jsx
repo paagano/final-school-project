@@ -51,7 +51,7 @@ const Tills = () => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
 
       {/* {unauthorized ? (
         <AuthorizationError />

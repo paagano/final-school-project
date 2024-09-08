@@ -202,6 +202,8 @@ module.exports = {
             res.status(200).send({
               message: `${savedUsers.length} users uploaded successfully!`,
             });
+
+            console.log(`${savedUsers.length} users uploaded successfully!`);
           } catch (bulkError) {
             console.error(
               "Error during bulk user creation:",
@@ -221,7 +223,7 @@ module.exports = {
             try {
               // Move processed file from uploads/ to uploads_processed/
               fs.renameSync(filePath, processedFilePath);
-              console.log(`File successfully moved to: ${processedFilePath}`);
+              console.log(`Processed File successfully moved to: ${processedFilePath}`);
             } catch (err) {
               console.error(
                 `Error moving file to uploads_processed/: ${err.message}`

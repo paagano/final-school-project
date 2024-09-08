@@ -4,7 +4,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
-export default function NavBar({ userName = "Philip Agano [Admin]" }) {
+export default function NavBar({
+  userName = "Philip Agano",
+  role = "[Admin]",
+}) {
   return (
     <>
       <div>
@@ -23,13 +26,13 @@ export default function NavBar({ userName = "Philip Agano [Admin]" }) {
               {/* <Nav.Link as={Link} to="/csms/create-user">
                 Register
               </Nav.Link>
-              <Nav.Link as={Link} to="/csms/log-out">
+              <Nav.Link as={Link} to="/csms/logout">
                 Logout
               </Nav.Link> */}
             </Nav>
             <Nav>
               <Navbar.Text>
-                {userName ? `Logged in as: ${userName}` : ""}
+                {userName ? `Logged in as: ${userName} ${role}` : ""}
               </Navbar.Text>
             </Nav>
           </Container>

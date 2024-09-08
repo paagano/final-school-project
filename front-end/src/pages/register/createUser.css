@@ -76,12 +76,6 @@ input[type="file"] {
   margin-bottom: 10px;
 }
 
-p {
-  font-size: 14px;
-  color: #555;
-}
-
-/*CSS to your createUser.css file*/
 .bulkUploadForm .inputGroup a {
   margin-top: 10px;
   display: block;
@@ -89,5 +83,3 @@ p {
   text-decoration: none;
   font-weight: bold;
 }
-
-

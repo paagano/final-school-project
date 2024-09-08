@@ -51,7 +51,7 @@ const Branches = () => {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
 
       {/* {unauthorized ? (
         <AuthorizationError />
