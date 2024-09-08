@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBar from "../../components/navbar/NavBar";
+import NavBar from "../../components/navbar/NavBar.jsx";
 import { Menu } from "antd";
 import {
   DashboardOutlined,
@@ -18,7 +18,7 @@ import {
 import { Bar, Pie, Line } from "@ant-design/charts";
 import "antd/dist/reset.css";
 import "../../App.css";
-import "./adminDashboard.css";
+import "./dashboards.css";
 
 import HomePage from "../home/HomePage.jsx";
 import NotFoundPage from "../notFoundPage/NotFoundPage.jsx";
@@ -34,6 +34,8 @@ import BulkUploadUsers from "../register/BulkUploadUsers.jsx";
 import ListRoles from "../../components/roles/ListRoles.jsx";
 import CreateRole from "../../components/roles/CreateRole.jsx";
 import Logout from "../logout/Logout.jsx";
+import { UpdateUser } from "../../components/users/UpdateUser.jsx";
+import DeleteUser from "../../components/users/DeleteUser.jsx";
 
 const AdminDashboard = () => {
   const barData = [
@@ -162,6 +164,12 @@ const AdminDashboard = () => {
         break;
       case "/csms/bulk-create-users":
         setSelectedComponent(<BulkUploadUsers />);
+        break;
+      case "/csms/update-user/:userId":
+        setSelectedComponent(<UpdateUser />);
+        break;
+      case "/csms/delete-user/:userId":
+        setSelectedComponent(<DeleteUser />);
         break;
       case "/csms/get-all-roles":
         setSelectedComponent(<ListRoles />);

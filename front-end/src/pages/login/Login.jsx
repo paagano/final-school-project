@@ -34,8 +34,6 @@ const Login = () => {
       roleName === "admin"
         ? navigate("/csms/admin-dashboard")
         : navigate("/csms/user-dashboard");
-
-      // navigate("/csms/admin-dashboard");
     });
   };
 

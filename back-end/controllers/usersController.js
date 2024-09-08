@@ -7,6 +7,7 @@ const csvParser = require("csv-parser");
 const { Parser } = require("json2csv"); // To convert JSON to CSV
 const { signAccessToken } = require("../auth/jwtHelpers.js");
 const { authSchema } = require("../auth/validateSchema");
+const bcrypt = require("bcrypt");
 
 //use the model:
 const users = db.users;
@@ -163,13 +164,11 @@ module.exports = {
 
           usersData.push(user);
         })
+
         .on("end", async () => {
-          // At the end of parsing, validate and process users:
           console.log("CSV file successfully read. Processing users...");
-
           const validUsersData = [];
-
-          // Validate each user and check if they already exist:
+          // Validate each user and check if they already exist
           for (const user of usersData) {
             try {
               await authSchema.validateAsync(user); // Validate user data
@@ -178,6 +177,11 @@ module.exports = {
               });
 
               if (!userExists) {
+                // Hash the passwords before adding the users to validUsersData
+                const salt = await bcrypt.genSalt(12); // 12 rounds of salting
+                const hashedPassword = await bcrypt.hash(user.password, salt);
+                user.password = hashedPassword; // Replace plain text password with the hashed password
+
                 validUsersData.push(user); // Only add valid and non-existing users
               }
             } catch (error) {
@@ -185,18 +189,16 @@ module.exports = {
             }
           }
 
-          // Debugging: Check the valid users before insertion
           console.log(`Found ${validUsersData.length} valid users to upload.`);
           console.log("Valid Users:", validUsersData);
 
-          // If no valid users are found, return an error response
           if (validUsersData.length === 0) {
             return res
               .status(400)
               .send({ message: "No valid users to upload." });
           }
 
-          // Bulk insert valid users into the database:
+          // Bulk insert valid users into the database
           try {
             const savedUsers = await users.bulkCreate(validUsersData);
             res.status(200).send({
@@ -211,7 +213,6 @@ module.exports = {
             );
             next(bulkError);
           } finally {
-            // Defining uploadsProcessedDir:
             const uploadsProcessedDir = path.join(
               __dirname,
               "../uploads_processed"
@@ -223,19 +224,19 @@ module.exports = {
             try {
               // Move processed file from uploads/ to uploads_processed/
               fs.renameSync(filePath, processedFilePath);
-              console.log(`Processed File successfully moved to: ${processedFilePath}`);
+              console.log(
+                `Processed File successfully moved to: ${processedFilePath}`
+              );
             } catch (err) {
               console.error(
                 `Error moving file to uploads_processed/: ${err.message}`
               );
             }
-            // Safely delete the file using 'path':
-            // fs.unlinkSync(filePath);
           }
         })
         .on("error", (err) => {
           console.error("Error reading CSV file:", err.message);
-          next(err); // I will handle file reading errors here later
+          next(err); // Handle file reading errors
         });
     } catch (error) {
       next(error); // Global error handling

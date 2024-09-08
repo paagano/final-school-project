@@ -86,7 +86,7 @@ const BulkUploadUsers = () => {
               required
             />
             {/* Display the selected file name */}
-            {/* {fileName && <p>Selected File: {fileName}</p>} */}
+            {fileName && <p className="file-name">Selected File: {fileName}</p>}
 
             <a
               href="data:text/csv;base64,Zmlyc3ROYW1lLGxhc3ROYW1lLGVtYWlsLHBhc3N3b3JkLHJvbGVOYW1lLGJyYW5jaENvZGUKV2FuLFdhbix3YW5AZ21haWwuY29tLDEyMzQ1NixhZG1pbiwxClVuLFVuLHVuQGdtYWlsLmNvbSwxMjM0NTYsdGVsbGVyLDgKR2luLEdpbixnaW5AZ21haWwuY29tLDEyMzQ1Nix0ZWxsZXIsMg=="
