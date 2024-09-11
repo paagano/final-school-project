@@ -29,11 +29,17 @@ const Login = () => {
     );
 
     await login(credentials, () => {
-      // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to standard user Dashboard:
+      // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to appropriate user Dashboard:
       const { roleName } = res.data; // Assuming response has roleName
-      roleName === "admin"
-        ? navigate("/csms/admin-dashboard")
-        : navigate("/csms/user-dashboard");
+      if (roleName === "admin") {
+        navigate("/csms/admin-dashboard");
+      } else if (roleName === "HO Card Center") {
+        navigate("/csms/HO-dashboard");
+      } else if (roleName === "Branch Admin") {
+        navigate("/csms/branch-admin-dashboard");
+      } else {
+        navigate("/csms/user-dashboard");
+      }
     });
   };
 

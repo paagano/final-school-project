@@ -30,6 +30,12 @@ import Branches from "./components/branches/Branches.jsx";
 import GetUserDetails from "./components/users/GetUserDetails.jsx";
 import DeleteUser from "./components/users/DeleteUser.jsx";
 import BulkUploadUsers from "./pages/register/BulkUploadUsers.jsx";
+import UserDashboard from "./pages/dashboards/UserDashboard.jsx";
+import VoultToTill from "./components/tills/VoultToTill.jsx";
+import TillToVoult from "./components/tills/TillToVoult.jsx";
+import CaptureSpoiltCard from "./pages/cards/CaptureSpoiltCard.jsx";
+import MySpoiltCards from "./pages/cards/MySpoiltCards.jsx";
+import TellerIssueCard from "./pages/cards/TellerIssueCard.jsx";
 // import "antd/dist/antd.css";
 
 function App() {
@@ -43,14 +49,23 @@ function App() {
         <Route path="/csms/update-user/:userId" element={<UpdateUser />} />
         <Route path="/csms/delete-user/:userId" element={<DeleteUser />} />
         <Route path="/csms/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/csms/user-dashboard" element={<UserDashboard />} />
         <Route path="/csms/get-users" element={<ListUsers />} />
         <Route path="/csms/users/:userId" element={<GetUserDetails />} />
         <Route path="/csms/get-card-types" element={<ListCardTypes />} />
         <Route path="/csms/get-all-branches" element={<Branches />} />
         <Route path="/csms/create-branch" element={<CreateBranch />} />
         <Route path="/csms/create-card-type" element={<CreateCardType />} />
+        <Route
+          path="/csms/capture-spoilt-card"
+          element={<CaptureSpoiltCard />}
+        />
+        <Route path="/csms/my-spoilt-cards" element={<MySpoiltCards />} />
+        <Route path="/csms/teller-issue-card" element={<TellerIssueCard />} />
         <Route path="/csms/create-till" element={<CreateTill />} />
         <Route path="/csms/get-all-tills" element={<Tills />} />
+        <Route path="/csms/voult-to-till" element={<VoultToTill />} />
+        <Route path="/csms/till-to-voult" element={<TillToVoult />} />
         <Route path="/csms/create-role" element={<CreateRole />} />
         <Route path="/csms/get-all-roles" element={<ListRoles />} />
         <Route

@@ -3,9 +3,9 @@ const db = require("../models/dbConnect.js");
 const createError = require("http-errors");
 
 //use the models
-const transitStock = db.transitstocks;
-const branchStock = db.branchstocks;
-const headOfficeStock = db.headofficestocks;
+const transitStocks = db.transitstocks;
+const branchStocks = db.branchstocks;
+const headOfficeStocks = db.headofficestocks;
 const tellers = db.tellers;
 const tellerTills = db.tellertills;
 const issuedCards = db.issuedcards;

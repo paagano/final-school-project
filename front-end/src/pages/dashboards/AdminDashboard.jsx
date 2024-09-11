@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavBar from "../../components/navbar/NavBar.jsx";
+import { useNavigate } from "react-router-dom";
 import { Menu } from "antd";
 import {
   DashboardOutlined,
@@ -14,6 +15,7 @@ import {
   CreditCardFilled,
   AccountBookOutlined,
   RotateLeftOutlined,
+  HomeOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Bar, Pie, Line } from "@ant-design/charts";
 import "antd/dist/reset.css";
@@ -129,12 +131,11 @@ const AdminDashboard = () => {
     adminLandingPageContent
   );
 
+  const navigate = useNavigate();
+
   const handleMenuClick = ({ key }) => {
     // Set the component to be rendered based on the clicked menu key:
     switch (key) {
-      case "/":
-        setSelectedComponent(<HomePage />);
-        break;
       case "/csms/admin-dashboard":
         setSelectedComponent(adminLandingPageContent);
         break;
@@ -179,6 +180,9 @@ const AdminDashboard = () => {
         break;
       case "/csms/logout":
         setSelectedComponent(<Logout />);
+        break;
+      case "/":
+        navigate("/");
         break;
 
       default:
@@ -297,6 +301,11 @@ const AdminDashboard = () => {
                         key: "/csms/create-role",
                       },
                     ],
+                  },
+                  {
+                    label: "Home",
+                    icon: <HomeOutlined />,
+                    key: "/",
                   },
                   {
                     label: "Logout",
