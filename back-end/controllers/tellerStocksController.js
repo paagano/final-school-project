@@ -103,7 +103,7 @@ module.exports = {
         let tellerTill = await tellerTills.findOne({ where: { tillNumber } });
 
         // Update branch stock (Voult) by deducting quantity
-        await branchStock.update(
+        await branchStocks.update(
           { quantity: db.sequelize.literal(`quantity - ${quantity}`) },
           { where: { cardId, branchCode }, transaction: t }
         );
