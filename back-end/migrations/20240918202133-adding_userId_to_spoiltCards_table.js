@@ -1,17 +1,16 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("branches", "region", {
-      type: Sequelize.STRING,
+    await queryInterface.addColumn("spoiltcards", "userId", {
+      type: Sequelize.INTEGER,
       allowNull: true,
-      after: "brancName",
+      after: "cardId",
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn("branches", "region");
+    await queryInterface.removeColumn("spoiltcards", "userId");
   },
 };

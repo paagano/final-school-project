@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       cardId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       tillNumber: {

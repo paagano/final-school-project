@@ -32,6 +32,7 @@ db.branches = require("./branchesModel.js")(sequelize, DataTypes);
 db.roles = require("./rolesModel.js")(sequelize, DataTypes);
 db.tills = require("./tillsModel.js")(sequelize, DataTypes);
 db.cardsbranches = require("./cardsBranchesModel.js")(sequelize, DataTypes);
+db.cardsusers = require("./cardsUsersModel.js")(sequelize, DataTypes);
 db.orders = require("./branchOrdersModel.js")(sequelize, DataTypes);
 db.headofficeorders = require("./headOfficeOrdersModel.js")(
   sequelize,
@@ -71,5 +72,14 @@ db.branches.belongsToMany(db.cards, { through: db.cardsbranches });
 
 db.headofficestocks.belongsTo(db.cards, { foreignKey: "cardId" });
 db.cards.hasOne(db.headofficestocks, { foreignKey: "cardId" });
+
+db.cards.belongsToMany(db.users, {
+  through: db.cardsusers,
+  foreignKey: "userId",
+});
+db.users.belongsToMany(db.cards, {
+  through: db.cardsusers,
+  foreignKey: "cardId",
+});
 
 module.exports = db;

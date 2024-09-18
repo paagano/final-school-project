@@ -10,6 +10,7 @@ const tellers = db.tellers;
 const tellerTills = db.tellertills;
 const issuedCards = db.issuedcards;
 const spoiltCards = db.spoiltcards;
+const cardsUsers = db.cardsusers;
 const branches = db.branches;
 const tills = db.tills;
 const users = db.users;
@@ -141,10 +142,10 @@ module.exports = {
   // tellerReceiveStockFromBranchVoult: async (req, res, next) => {},
 
   tellerCaptureSpoiltCard: async (req, res, next) => {
-    const { cardId, tillNumber, branchCode, quantity } = req.body;
+    const { cardId, userId, tillNumber, branchCode, quantity } = req.body;
 
     try {
-      if (!tillNumber || !cardId || !branchCode || !quantity) {
+      if (!tillNumber || !cardId || !userId || !branchCode || !quantity) {
         return res.status(400).json({ error: "Invalid Input" });
       }
 
@@ -165,9 +166,10 @@ module.exports = {
           { where: { cardId, branchCode, tillNumber }, transaction: t }
         );
         await spoiltCards.create(
-          { cardId, branchCode, tillNumber, quantity },
+          { cardId, userId, branchCode, tillNumber, quantity },
           { transaction: t }
         );
+        // await cardsUsers.create({ cardId, userId }, { transaction: t });
 
         // Update branch stock (Voult) by adding quantity:
         // let affectedRaw = await branchStock.update(
@@ -303,6 +305,46 @@ module.exports = {
         console.error(error);
         return res.status(500).json({ error: "Internal Server Error2" });
       }
+    }
+  },
+
+  // get all card types:
+  getSpoiltCards: async (req, res, next) => {
+    try {
+      let allSpoiltCards = await spoiltCards.findAll({});
+      res.status(200).send(allSpoiltCards);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  // get spoilt cards by user id:
+  getSpoiltCardsByUserId: async (req, res, next) => {
+    try {
+      let id = req.params.userId;
+      let mySpoiltCards = await spoiltCards.findAll({ where: { userId: id } });
+
+      if (!mySpoiltCards) {
+        throw createError(404, " No Spoilt Cards found for selected user");
+      }
+      res.status(200).send(mySpoiltCards);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  // get spoilt cards by branch:
+  getSpoiltCardsByBranch: async (req, res, next) => {
+    try {
+      let id = req.params.branchCode; 
+      let branchSpoiltCards = await spoiltCards.findAll({ where: { branchCode: id } });
+
+      if (!branchSpoiltCards) {
+        throw createError(404, " No Spoilt Cards found for selected branch");
+      }
+      res.status(200).send(branchSpoiltCards);
+    } catch (error) {
+      next(error);
     }
   },
 };

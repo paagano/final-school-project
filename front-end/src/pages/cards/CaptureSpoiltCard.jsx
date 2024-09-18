@@ -104,6 +104,19 @@ const CaptureSpoiltCard = () => {
               required
             />
 
+            <label className="em_label" htmlFor="userId">
+              User ID
+            </label>
+            <input
+              onChange={handleChange}
+              type="text"
+              id="userId"
+              name="userId"
+              autoComplete="off"
+              placeholder="e.g. 1"
+              required
+            />
+
             <label className="em_label" htmlFor="quantity">
               Quantity
             </label>

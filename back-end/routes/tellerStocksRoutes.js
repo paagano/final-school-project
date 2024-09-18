@@ -36,4 +36,25 @@ routes.patch(
   TellerStocksController.branchAdminCaptureSpoiltCard
 );
 
+//Route for getting list of all spoilt card:
+routes.get(
+  "/get-spoilt-cards",
+  verifyAccessToken,
+  TellerStocksController.getSpoiltCards
+);
+
+//Route for getting list of all spoilt card by user ID:
+routes.get(
+  "/my-spoilt-cards/:userId",
+  verifyAccessToken,
+  TellerStocksController.getSpoiltCardsByUserId
+);
+
+//Route for getting list of all spoilt cards per branch:
+routes.get(
+  "/branch-spoilt-cards/:branchCode",
+  verifyAccessToken,
+  TellerStocksController.getSpoiltCardsByBranch
+);
+
 module.exports = routes;
