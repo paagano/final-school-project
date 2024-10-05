@@ -1,0 +1,78 @@
+.table-responsive {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  width: 50%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1); /* Added box shadow */
+}
+
+.table thead th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  border: 1px solid #dddddd;
+}
+
+.tills-list-header {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.create-till {
+  width: 25%;
+  margin: 50px auto;
+  background-color: white; /*change to white White*/
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+}
+
+.create-till-form .inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-till-form .inputGroup label {
+  margin-top: 10px;
+  color: gray; /*new*/
+}
+
+.create-till-form .inputGroup input {
+  margin-top: 5px;
+  padding: 10px;
+  color: gray; /*new*/
+}
+
+.create-till-form button {
+  margin-top: 10px;
+}
+
+.login {
+  margin-top: 5px;
+}
+
+.create-till h3 {
+  text-align: center;
+  font-weight: 700;
+  color: darkcyan;
+}
+
+
+

@@ -1,0 +1,89 @@
+.addUser {
+  width: 25%;
+  margin: 50px auto;
+  background-color: white; /*change to white White*/
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+}
+
+.addUserForm .inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.addUserForm .inputGroup label {
+  margin-top: 10px;
+  color: gray; /*new*/
+}
+
+.addUserForm .inputGroup input {
+  margin-top: 5px;
+  padding: 10px;
+  color: gray; /*new*/
+}
+
+.addUserForm button {
+  margin-top: 10px;
+}
+
+.login {
+  margin-top: 5px;
+}
+
+.addUser h3 {
+  text-align: center;
+  font-weight: 700;
+  color: darkcyan;
+}
+
+.addUser h6 {
+  color: red;
+}
+
+/* Style for the bulk upload button */
+.btn.btn-bulk-upload {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn.btn-bulk-upload:hover {
+  background-color: #45a049;
+}
+
+/* Input field for CSV file */
+.csv_label {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.bulkUploadForm .inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.file-name {
+  color: grey;
+}
+
+input[type="file"] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.bulkUploadForm .inputGroup a {
+  margin-top: 10px;
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}

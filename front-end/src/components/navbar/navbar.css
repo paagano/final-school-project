@@ -1,0 +1,18 @@
+/* NavBar Styles */
+.navbar-fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays on top of other content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for a subtle effect */
+}
+
+/* Ensure the navbar has a consistent height */
+.navbar {
+  height: 70px; /* Adjust this to match your actual navbar height */
+}
+
+body {
+  padding-top: 70px; /* Match the padding to the navbar height to prevent overlap */
+}
