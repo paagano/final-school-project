@@ -3,9 +3,9 @@ const db = require("../models/dbConnect.js");
 const createError = require("http-errors");
 
 //use the model
-const transitStock = db.transitStocks;
-const branchStock = db.branchStocks;
-const headOfficeStock = db.headOfficeStocks;
+const transitStock = db.transitstocks;
+const branchStock = db.branchstocks;
+const headOfficeStock = db.headofficestocks;
 const tellerStock = db.tellerStocks;
 
 module.exports = {
@@ -119,9 +119,7 @@ module.exports = {
         // Commit the transaction:
         await t.commit();
 
-        return res
-          .status(200)
-          .send({ message: "Stock transferred successfully" });
+        return res.status(200).send({ message: "Stock received successfully" });
       } catch (error) {
         // Rollback the transaction in case of an error:
         await t.rollback();

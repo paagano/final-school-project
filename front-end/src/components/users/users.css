@@ -132,3 +132,42 @@
 .download-buttons .btn {
   margin-right: 10px;
 }
+
+.filter-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-section label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.filter-section select {
+  width: 250px; /* Adjust this value to control the width of the dropdown */
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+table.table-md {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+table.table-md th,
+table.table-md td {
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+

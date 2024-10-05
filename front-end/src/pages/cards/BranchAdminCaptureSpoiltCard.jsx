@@ -5,8 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./cards.css";
 import NavBar from "../../components/navbar/NavBar";
 
-const CaptureSpoiltCard = () => {
+const BranchAdminCaptureSpoiltCard = () => {
   const initialFormValues = {
+    userId: "",
     tillNumber: "",
     branchCode: "",
     cardId: "",
@@ -15,10 +16,10 @@ const CaptureSpoiltCard = () => {
 
   const [newFormValues, setNewFormValues] = useState(initialFormValues);
 
- const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setNewFormValues({ ...newFormValues, [name]: value });
-  }; 
+  };
 
   const saveSpoiltCard = (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ const CaptureSpoiltCard = () => {
 
     axios
       .post(
-        "http://localhost:6008/api/tills/teller-capture-spoilt-card",
+        "http://localhost:6008/api/tills/branch-admin-capture-spoilt-card",
         requestData,
         {
           headers: {
@@ -144,4 +145,4 @@ const CaptureSpoiltCard = () => {
   );
 };
 
-export default CaptureSpoiltCard;
+export default BranchAdminCaptureSpoiltCard;

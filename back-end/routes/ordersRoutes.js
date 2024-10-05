@@ -2,26 +2,49 @@ const express = require("express");
 
 const BranchOrdersController = require("../controllers/branchOrdersController");
 const HeadOfficeOrdersController = require("../controllers/headOfficeOrdersController");
+const authController = require("../auth/jwtHelpers");
+const { verifyAccessToken } = require("../auth/jwtHelpers");
 
 const routes = express.Router();
 
 //Route for making a new order - Branch:
-routes.post("/make-order", BranchOrdersController.branchMakeOrder);
+routes.post(
+  "/make-order",
+  verifyAccessToken,
+  authController.restrict("branch-admin"),
+  BranchOrdersController.branchMakeOrder
+);
+
+//Route for getting all orders - Branch:
+routes.get(
+  "/get-branch-orders",
+  verifyAccessToken,
+  authController.restrict("ho-card-center"),
+  BranchOrdersController.getAllBranchOrders
+);
+
+//Route for getting card orders by branch ID:
+routes.get(
+  "/get-my-branch-orders/:branchCode",
+  verifyAccessToken,
+  authController.restrict("branch-admin", "ho-card-center"),
+  BranchOrdersController.getCardOrdersByBranch
+);
 
 //Route for making a new order - Head Office:
-routes.post("/ho-make-order", HeadOfficeOrdersController.headOfficeMakeOrder);
+routes.post(
+  "/ho-make-order",
+  verifyAccessToken,
+  authController.restrict("ho-card-center"),
+  HeadOfficeOrdersController.headOfficeMakeOrder
+);
 
-// //Route for getting a single card record by id:
-// routes.get("/cards/:cardId", CardsController.getCardType);
-
-// //Route for getting list of all card types
-// routes.get("/cards", CardsController.getAllCardTypes);
-
-// //Route for updating a card type:
-// routes.put("/cards/:cardId", CardsController.updateCardType);
-// routes.patch("/cards/:cardId", CardsController.updateCardType);
-
-// //Route for deleting a card type:
-// routes.delete("/cards/:cardId", CardsController.deleteCardType);
+//Route for getting all orders - Head Office:
+routes.get(
+  "/get-ho-orders",
+  verifyAccessToken,
+  authController.restrict("ho-card-center"),
+  HeadOfficeOrdersController.getAllHeadOfficeOrders
+);
 
 module.exports = routes;

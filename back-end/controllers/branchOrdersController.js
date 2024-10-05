@@ -37,4 +37,31 @@ module.exports = {
       next(error);
     }
   },
+
+  // get all Branch Orders:
+  getAllBranchOrders: async (req, res, next) => {
+    try {
+      let allBranchOrders = await orders.findAll({});
+      res.status(200).send(allBranchOrders);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  // get card orders by branch Code:
+  getCardOrdersByBranch: async (req, res, next) => {
+    try {
+      let id = req.params.branchCode;
+      let branchOrders = await orders.findAll({
+        where: { branchCode: id },
+      });
+
+      if (!branchOrders || branchOrders.length === 0) {
+        throw createError(404, " No Orders found for selected branch");
+      }
+      res.status(200).send(branchOrders);
+    } catch (error) {
+      next(error);
+    }
+  },
 };

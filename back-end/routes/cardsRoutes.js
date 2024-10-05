@@ -6,7 +6,7 @@ const authController = require("../auth/jwtHelpers");
 
 const routes = express.Router();
 
-//Route for adding or creating a new card:
+//Route for adding or creating a new card type:
 routes.post(
   "/create-card-type",
   verifyAccessToken,

@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./tills.css";
+import "./orders.css";
 import NavBar from "../../components/navbar/NavBar";
 
-const VoultToTill = () => {
+const HOReceiveStock = () => {
   const initialFormValues = {
-    tillNumber: "",
-    branchCode: "",
+    transitId: "",
+    receivingBranchCode: "",
     cardId: "",
-    quantity: "",
+    quantity: 0,
   };
 
   const [newFormValues, setNewFormValues] = useState(initialFormValues);
@@ -20,73 +20,44 @@ const VoultToTill = () => {
     setNewFormValues({ ...newFormValues, [name]: value });
   };
 
-  const commitVoultToTill = (e) => {
+  const receiveStock = (e) => {
     e.preventDefault();
 
     const requestData = { ...newFormValues };
-
     const token = sessionStorage.getItem("accessToken");
 
     axios
-      .post("http://localhost:6008/api/voult/voult-to-till", requestData, {
+      .post("http://localhost:6008/api/orders/ho-receive-stock", requestData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
-
       .then((res) => {
-        toast.success("Voult-To-Till Operation Successful!", {
+        toast.success("Stock Received Successfully!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       })
       .catch((err) => {
-        toast.error("An error occurred while posting from voult...", {
+        toast.error("An error occurred while receiving stock...", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       });
 
     setNewFormValues(initialFormValues);
-    console.log(requestData);
   };
 
   return (
     <>
       {/* <NavBar /> */}
 
-      <div className="create-till">
-        <h3>Voult-To-Till Transfer</h3>
+      <div className="create-branch">
+        <h3>Receive Stock From Printer</h3>
 
-        <form onSubmit={commitVoultToTill} className="create-till-form">
+        <form onSubmit={receiveStock} className="create-branch-form">
           <div className="inputGroup">
-            <label className="em_label" htmlFor="tillNumber">
-              Till Number
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              id="tillNumber"
-              name="tillNumber"
-              autoComplete="off"
-              placeholder="Till Number"
-              required
-            />
-
-            <label className="em_label" htmlFor="branchCode">
-              Branch Code
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              id="branchCode"
-              name="branchCode"
-              autoComplete="off"
-              placeholder="Branch Code"
-              required
-            />
-
             <label className="em_label" htmlFor="cardId">
               Card ID
             </label>
@@ -95,28 +66,45 @@ const VoultToTill = () => {
               type="text"
               id="cardId"
               name="cardId"
-              autoComplete="off"
-              placeholder="Card ID"
+              value={newFormValues.cardId}
+              min="0"
+              placeholder="e.g. 2"
               required
             />
+
+            <label className="em_label" htmlFor="roleName">
+              Card Type
+            </label>
+            <select
+              onChange={handleChange}
+              id="cardType"
+              name="cardType"
+              required
+            >
+              <option value="">Select Card Type</option>
+              <option value="General Purpose Card">General Purpose Card</option>
+              <option value="Student Card">Student Card</option>
+              <option value="Multi Currency Card">Multi Currency Card</option>
+              <option value="Youth Card">Youth Card</option>
+            </select>
 
             <label className="em_label" htmlFor="quantity">
               Quantity
             </label>
             <input
               onChange={handleChange}
-              type="text"
+              type="number"
               id="quantity"
               name="quantity"
-              autoComplete="off"
-              placeholder="Quantity"
+              value={newFormValues.quantity}
+              min="0"
+              placeholder="e.g. 10"
               required
             />
 
-            <button type="submit" class="btn btn-success">
-              Commit Transaction
+            <button type="submit" className="btn btn-success">
+              Receive
             </button>
-
             <ToastContainer />
           </div>
         </form>
@@ -125,4 +113,4 @@ const VoultToTill = () => {
   );
 };
 
-export default VoultToTill;
+export default HOReceiveStock;

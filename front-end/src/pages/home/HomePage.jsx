@@ -5,15 +5,41 @@ import NavBar from "../../components/navbar/NavBar";
 function HomePage() {
   // Check if the user is logged in by checking the access token in session storage
   const accessToken = sessionStorage.getItem("accessToken"); // token is stored in sessionStorage
-  const userRole = sessionStorage.getItem("role"); // role is stored as well
+  const userRole = sessionStorage.getItem("role"); // role is stored in sessionStorage
 
   // Determine the link and text based on the access token and role
-  const getStartedLink = accessToken
-    ? userRole === "admin"
-      ? "/csms/admin-dashboard" // Redirect to Admin dashboard if user is Admin
-      : "/csms/user-dashboard" // Redirect to User dashboard if regular user
-    : "/csms/login"; // If no access token, go to login page
+  let getStartedLink;
 
+  if (accessToken) {
+    console.log("Access token exists. Checking user role...");
+
+    switch (userRole) {
+      case "admin":
+        console.log("User role is admin.");
+        getStartedLink = "/csms/admin-dashboard";
+        break;
+
+      case "ho-card-center":
+        console.log("User role is ho-card-center.");
+        getStartedLink = "/csms/HO-dashboard";
+        break;
+
+      case "branch-admin":
+        console.log("User role is branch-admin.");
+        getStartedLink = "/csms/branch-admin-dashboard";
+        break;
+
+      default:
+        console.log("User role is standard user.");
+        getStartedLink = "/csms/user-dashboard";
+        break;
+    }
+  } else {
+    console.log("No access token. Redirecting to login page.");
+    getStartedLink = "/csms/login"; // If no access token, go to login page
+  }
+
+  // Dynamically assigning the Get Started button a text:
   const getStartedButtonText = accessToken ? "Continue Working" : "Get Started";
 
   return (

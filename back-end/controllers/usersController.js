@@ -60,8 +60,10 @@ module.exports = {
 
       //Extracting the user role IF user is found:
       const roleName = user.roleName;
+      const userId = user.userId;
+      const branchCode = user.branchCode;
 
-      res.send({ accessToken, refreshToken, roleName }); // including role name value in the response body
+      res.send({ accessToken, refreshToken, roleName, userId, branchCode }); // including role name value in the response body
     } catch (error) {
       if (error.isJoi === true)
         return next(createError.BadRequest("Invalid username/password"));

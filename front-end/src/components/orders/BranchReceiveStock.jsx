@@ -2,34 +2,33 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./cards.css";
+import "./orders.css";
 import NavBar from "../../components/navbar/NavBar";
 
-const CaptureSpoiltCard = () => {
+const BranchReceiveStock = () => {
   const initialFormValues = {
-    tillNumber: "",
-    branchCode: "",
+    transitId: "",
+    receivingBranchCode: "",
     cardId: "",
-    quantity: "",
+    quantity: 0,
   };
 
   const [newFormValues, setNewFormValues] = useState(initialFormValues);
 
- const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setNewFormValues({ ...newFormValues, [name]: value });
-  }; 
+  };
 
-  const saveSpoiltCard = (e) => {
+  const receiveStock = (e) => {
     e.preventDefault();
 
     const requestData = { ...newFormValues };
-
     const token = sessionStorage.getItem("accessToken");
 
     axios
       .post(
-        "http://localhost:6008/api/tills/teller-capture-spoilt-card",
+        "http://localhost:6008/api/stock/branch-receive-stock",
         requestData,
         {
           headers: {
@@ -38,55 +37,55 @@ const CaptureSpoiltCard = () => {
           },
         }
       )
-
       .then((res) => {
-        toast.success("Spoilt Card Captured Successfully!", {
+        toast.success("Stock Received Successfully!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       })
       .catch((err) => {
-        toast.error("An error occurred while saving spoilt card...", {
+        toast.error("An error occurred while receiving stock...", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
         });
       });
 
     setNewFormValues(initialFormValues);
-    console.log(requestData);
   };
 
   return (
     <>
       {/* <NavBar /> */}
 
-      <div className="create-card-type">
-        <h3>Capture Spoilt Card</h3>
+      <div className="create-branch">
+        <h3>Receive Stock</h3>
 
-        <form onSubmit={saveSpoiltCard} className="create-card-form">
+        <form onSubmit={receiveStock} className="create-branch-form">
           <div className="inputGroup">
-            <label className="em_label" htmlFor="tillNumber">
-              Till Number
+            <label className="em_label" htmlFor="transitId">
+              Transit ID
             </label>
             <input
               onChange={handleChange}
               type="text"
-              id="tillNumber"
-              name="tillNumber"
+              id="transitId"
+              name="transitId"
+              value={newFormValues.transitId}
               autoComplete="off"
-              placeholder="e.g. 2"
+              placeholder="e.g. 1"
               required
             />
 
-            <label className="em_label" htmlFor="branchCode">
-              Branch Code
+            <label className="em_label" htmlFor="receivingBranchCode">
+              Receiving Branch Code
             </label>
             <input
               onChange={handleChange}
               type="text"
-              id="branchCode"
-              name="branchCode"
-              autoComplete="off"
+              id="receivingBranchCode"
+              name="receivingBranchCode"
+              value={newFormValues.receivingBranchCode}
+              min="0"
               placeholder="e.g. 1"
               required
             />
@@ -99,21 +98,9 @@ const CaptureSpoiltCard = () => {
               type="text"
               id="cardId"
               name="cardId"
-              autoComplete="off"
-              placeholder="e.g. 1"
-              required
-            />
-
-            <label className="em_label" htmlFor="userId">
-              User ID
-            </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              id="userId"
-              name="userId"
-              autoComplete="off"
-              placeholder="e.g. 1"
+              value={newFormValues.cardId}
+              min="0"
+              placeholder="e.g. 2"
               required
             />
 
@@ -125,17 +112,15 @@ const CaptureSpoiltCard = () => {
               type="number"
               id="quantity"
               name="quantity"
-              autoComplete="off"
-              placeholder="e.g. 2"
-              min="1"
-              max="10"
+              value={newFormValues.quantity}
+              min="0"
+              placeholder="e.g. 10"
               required
             />
 
-            <button type="submit" class="btn btn-success">
-              Save
+            <button type="submit" className="btn btn-success">
+              Receive
             </button>
-
             <ToastContainer />
           </div>
         </form>
@@ -144,4 +129,4 @@ const CaptureSpoiltCard = () => {
   );
 };
 
-export default CaptureSpoiltCard;
+export default BranchReceiveStock;

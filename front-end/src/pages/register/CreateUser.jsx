@@ -129,15 +129,19 @@ const CreateUser = () => {
             <label className="em_label" htmlFor="roleName">
               Role
             </label>
-            <input
+            <select
               onChange={handleChange}
-              type="text"
               id="roleName"
               name="roleName"
-              autoComplete="off"
-              placeholder="e.g. admin"
               required
-            />
+            >
+              <option value="">Select Role</option>
+              <option value="teller">Teller</option>
+              <option value="branch-front-office">Branch Front Office</option>
+              <option value="ho-card-center">HQ Card Center</option>
+              <option value="branch-admin">Branch Admin</option>
+              <option value="admin">System Administrator</option>
+            </select>
 
             <button type="submit" className="btn btn-success">
               Save
@@ -152,4 +156,3 @@ const CreateUser = () => {
 };
 
 export default CreateUser;
-

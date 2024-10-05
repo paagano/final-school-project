@@ -58,7 +58,7 @@ const TillToVoult = () => {
       {/* <NavBar /> */}
 
       <div className="create-till">
-        <h3>Return Cards To Voult</h3>
+        <h3>Till-To-Voult Transfer</h3>
 
         <form onSubmit={commitTillToVoult} className="create-till-form">
           <div className="inputGroup">

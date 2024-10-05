@@ -23,7 +23,9 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         sessionStorage.setItem("accessToken", token); // Storing accessToken in local storage after login.
         // sessionStorage.setItem("email", credentials.email); // Storing email in local storage after login.
-        sessionStorage.setItem("role", response.data.roleName); // Storing email in local storage after login.
+        sessionStorage.setItem("role", response.data.roleName); // Storing user role in local storage after login.
+        sessionStorage.setItem("userId", response.data.userId); // Storing user ID in local storage after login.
+        sessionStorage.setItem("branchCode", response.data.branchCode); // Storing branchCode in local storage after login.
         onSuccess();
       }
 

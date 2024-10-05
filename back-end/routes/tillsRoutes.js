@@ -1,6 +1,5 @@
 const express = require("express");
 const authController = require("../auth/jwtHelpers");
-
 const TillsController = require("../controllers/tillsController");
 const { verifyAccessToken } = require("../auth/jwtHelpers");
 

@@ -1,6 +1,7 @@
 const express = require("express");
 
 const TellerStocksController = require("../controllers/tellerStocksController");
+const authController = require("../auth/jwtHelpers");
 const { verifyAccessToken } = require("../auth/jwtHelpers");
 
 const routes = express.Router();
@@ -9,30 +10,39 @@ const routes = express.Router();
 routes.post(
   "/voult-to-till",
   verifyAccessToken,
+  authController.restrict("branch-admin", "teller", "branch-front-office"),
   TellerStocksController.branchAdminHandStockToTeller
 );
 
 //Route for returning card from teller till to branch vault:
 routes.post(
   "/till-to-voult",
+  verifyAccessToken,
+  authController.restrict("branch-admin", "teller", "branch-front-office"),
   TellerStocksController.tellerReturnStockToBranchVoult
 );
 
 //Route for issuing card to customer:
 routes.post(
   "/teller-issue-card",
+  verifyAccessToken,
+  authController.restrict("branch-admin", "teller", "branch-front-office"),
   TellerStocksController.tellerIssueCardToCustomer
 );
 
 //Route for teller capture spoilt card:
 routes.post(
   "/teller-capture-spoilt-card",
+  verifyAccessToken,
+  authController.restrict("branch-admin", "teller", "branch-front-office"),
   TellerStocksController.tellerCaptureSpoiltCard
 );
 
-//Route for Admin capture spoilt card:
-routes.patch(
-  "/admin-capture-spoilt-card",
+//Route for Branch Admin capture spoilt card:
+routes.post(
+  "/branch-admin-capture-spoilt-card",
+  verifyAccessToken,
+  authController.restrict("branch-admin"),
   TellerStocksController.branchAdminCaptureSpoiltCard
 );
 
@@ -40,6 +50,7 @@ routes.patch(
 routes.get(
   "/get-spoilt-cards",
   verifyAccessToken,
+  authController.restrict("ho-card-center"),
   TellerStocksController.getSpoiltCards
 );
 
@@ -54,6 +65,7 @@ routes.get(
 routes.get(
   "/branch-spoilt-cards/:branchCode",
   verifyAccessToken,
+  authController.restrict("branch-admin"),
   TellerStocksController.getSpoiltCardsByBranch
 );
 

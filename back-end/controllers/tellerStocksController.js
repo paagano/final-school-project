@@ -17,10 +17,10 @@ const users = db.users;
 
 module.exports = {
   branchAdminCaptureSpoiltCard: async (req, res, next) => {
-    const { tillNumber, cardId, branchCode, quantity } = req.body;
+    const { userId, tillNumber, cardId, branchCode, quantity } = req.body;
 
     try {
-      if (!tillNumber || !cardId || !branchCode || !quantity) {
+      if (!userId || !tillNumber || !cardId || !branchCode || !quantity) {
         return res.status(400).json({ error: "Invalid Input" });
       }
 
@@ -36,7 +36,7 @@ module.exports = {
         }
 
         // Update branch stock (voult) by deducting quantity
-        await branchStock.update(
+        await branchStocks.update(
           {
             quantity: db.sequelize.literal(`quantity - ${quantity}`),
           },
@@ -49,6 +49,7 @@ module.exports = {
 
         await spoiltCards.create(
           {
+            userId,
             cardId,
             branchCode,
             tillNumber,

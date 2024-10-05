@@ -7,23 +7,26 @@ import { ToastContainer, toast } from "react-toastify";
 import NavBar from "../../components/navbar/NavBar";
 // import AuthorizationError from "./AuthorizationError";
 
-const MySpoiltCards = () => {
+const BranchSpoiltCards = () => {
   const [spoiltCards, setSpoiltCards] = useState([]);
   //   const [unauthorized, setUnauthorized] = useState(false);
 
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
-    const userId = sessionStorage.getItem("userId");
+    const branchCode = sessionStorage.getItem("branchCode");
 
     axios
-      .get(`http://localhost:6008/api/tills/my-spoilt-cards/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `http://localhost:6008/api/tills/branch-spoilt-cards/${branchCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
-        console.log("userId:", userId);
+        console.log("branchCode:", branchCode);
         console.log("API response:", res.data); // Logging the response data
         setSpoiltCards(res.data);
       })
@@ -49,7 +52,7 @@ const MySpoiltCards = () => {
       )} */}
 
       <>
-        <h5 className="card-types-header"> My Spoilt Cards</h5>
+        <h5 className="card-types-header"> Branch Spoilt Cards</h5>
 
         <div className="table-responsive">
           <table className="table table-bordered table-md">
@@ -83,4 +86,4 @@ const MySpoiltCards = () => {
   );
 };
 
-export default MySpoiltCards;
+export default BranchSpoiltCards;

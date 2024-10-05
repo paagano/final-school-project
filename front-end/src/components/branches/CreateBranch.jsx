@@ -75,15 +75,15 @@ const CreateBranch = () => {
             <label className="em_label" htmlFor="region">
               Region
             </label>
-            <input
-              onChange={handleChange}
-              type="text"
-              id="region"
-              name="region"
-              autoComplete="off"
-              placeholder="e.g. Coast"
-              required
-            />
+            <select onChange={handleChange} id="region" name="region" required>
+              <option value="">Select Region</option>
+              <option value="Nairobi">Nairobi</option>
+              <option value="Central">Central</option>
+              <option value="Coast">Coast</option>
+              <option value="Western">Western</option>
+              <option value="Rift Valley">Rift Valley</option>
+              <option value="Eastern">Eastern</option>
+            </select>
 
             <button type="submit" class="btn btn-success">
               Save
