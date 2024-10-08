@@ -1,40 +1,45 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SelfResetPassword() {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check if passwords match
     if (newPassword !== confirmPassword) {
-      setMessage("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
     try {
       // Send a request to the API to reset the password
-      const response = await axios.post("/api/reset-password", {
-        email,
-        newPassword,
-      });
+      const response = await axios.post(
+        "http://localhost:6008/api/self-reset-password",
+        {
+          email,
+          newPassword,
+        }
+      );
 
       if (response.data.success) {
-        setMessage("Password has been reset successfully!");
+        toast.success("Password has been reset successfully!");
       } else {
-        setMessage("Failed to reset password. Please try again.");
+        toast.error(
+          "Email does not exist or failed to reset password. Please try again."
+        );
       }
     } catch (error) {
-      setMessage("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
   };
 
   return (
-    // I will separate the css from the html later!!
     <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
       <h2>Reset Password</h2>
       <form onSubmit={handleSubmit}>
@@ -71,10 +76,11 @@ export default function SelfResetPassword() {
             required
           />
         </div>
-        {message && <p>{message}</p>}
         <button type="submit" className="btn btn-primary">
           Reset Password
         </button>
+
+        <ToastContainer />
       </form>
     </div>
   );

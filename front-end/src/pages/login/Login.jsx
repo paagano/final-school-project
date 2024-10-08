@@ -85,7 +85,11 @@ const Login = () => {
         <div className="login">
           {/* <p>Don't have account yet?</p> */}
           <p>Forgot Password?</p>
-          <Link to="/csms/reset-password" type="submit" class="btn btn-primary">
+          <Link
+            to="/csms/self-reset-password"
+            type="submit"
+            class="btn btn-primary"
+          >
             Reset
           </Link>
         </div>

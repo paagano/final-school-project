@@ -116,7 +116,7 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="metric-card">
-            <h3>Total Cards</h3>
+            <h3>Card Types</h3>
             <div className="metric-value">4</div>
             <div className="metric-chart">
               <Pie {...pieConfig} /> {/* Pie chart */}
