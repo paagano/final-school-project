@@ -30,12 +30,12 @@ const Login = () => {
 
     await login(credentials, () => {
       // Checking if logged in user is "admin", then redirecting them to AdminDashboard, else to appropriate user Dashboard:
-      const { roleName } = res.data; // Assuming response has roleName
+      const { roleName } = res.data;
       if (roleName === "admin") {
         navigate("/csms/admin-dashboard");
-      } else if (roleName === "HO Card Center") {
+      } else if (roleName === "ho-card-center") {
         navigate("/csms/HO-dashboard");
-      } else if (roleName === "Branch Admin") {
+      } else if (roleName === "branch-admin") {
         navigate("/csms/branch-admin-dashboard");
       } else {
         navigate("/csms/user-dashboard");
