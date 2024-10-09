@@ -21,9 +21,9 @@ export default function NavBar({
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/csms/login">
+              {/* <Nav.Link as={Link} to="/csms/login">
                 Login
-              </Nav.Link>
+              </Nav.Link> */}
               {/* <Nav.Link as={Link} to="/csms/create-user">
                 Register
               </Nav.Link>

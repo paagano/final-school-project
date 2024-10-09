@@ -10,6 +10,7 @@ import {
   RotateLeftOutlined,
   HomeOutlined,
   LockOutlined,
+  SettingOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Bar, Pie, Line } from "@ant-design/charts";
 import "antd/dist/reset.css";
@@ -23,6 +24,7 @@ import TillToVoult from "../../components/tills/TillToVoult.jsx";
 import CaptureSpoiltCard from "../cards/CaptureSpoiltCard.jsx";
 import MySpoiltCards from "../cards/MySpoiltCards.jsx";
 import TellerIssueCard from "../cards/TellerIssueCard.jsx";
+import ChangePassword from "../../components/resetPassword/ChangePassword.jsx";
 
 const UserDashboard = () => {
   // User-focused dummy data for charts
@@ -144,6 +146,9 @@ const UserDashboard = () => {
       case "/csms/teller-till":
         setSelectedComponent(<MySpoiltCards />);
         break;
+      case "/csms/change-password":
+        setSelectedComponent(<ChangePassword />);
+        break;
       case "/csms/logout":
         setSelectedComponent(<Logout />);
         break;
@@ -222,6 +227,22 @@ const UserDashboard = () => {
                     label: "Home",
                     icon: <HomeOutlined />,
                     key: "/",
+                  },
+                  {
+                    label: "Settings",
+                    icon: <SettingOutlined />,
+                    children: [
+                      {
+                        label: "My Profile",
+                        icon: <OrderedListOutlined />,
+                        key: "/",
+                      },
+                      {
+                        label: "Change Password",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/change-password",
+                      },
+                    ],
                   },
                   {
                     label: "Logout",

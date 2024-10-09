@@ -20,7 +20,7 @@ module.exports = {
           .json({ success: false, message: "User not found" });
       }
 
-      // Hash the new password using bcrypt
+      // Hash the new password using bcrypt:
       const salt = await bcrypt.genSalt(12);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
 

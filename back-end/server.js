@@ -30,6 +30,8 @@ const TellerIssueCardToCustomer = require("./routes/tellerStocksRoutes");
 const TellerCaptureSpoiltCard = require("./routes/tellerStocksRoutes");
 const TillsRoutes = require("./routes/tillsRoutes");
 const SelfResetPasswordRoutes = require("./routes/selfResetPasswordRoutes");
+const ChangePasswordRoutes = require("./routes/changePasswordRoutes");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -52,6 +54,7 @@ app.use("/api/tills", TellerIssueCardToCustomer);
 app.use("/api/tills", TellerCaptureSpoiltCard);
 app.use("/api/tills", TillsRoutes);
 app.use("/api/", SelfResetPasswordRoutes);
+app.use("/api/", ChangePasswordRoutes);
 
 const PORT = process.env.PORT || 7000;
 
