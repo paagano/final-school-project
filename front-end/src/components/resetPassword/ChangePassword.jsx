@@ -5,41 +5,46 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import "./resetPassword.css";
 
-export default function SelfResetPassword() {
+const ChangePassword = () => {
   const [email, setEmail] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleChangePassword = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
-    if (newPassword !== confirmPassword) {
-      toast.error("Passwords do not match");
+    // Check if new password and confirm password match
+    if (newPassword !== confirmNewPassword) {
+      toast.error("New password and confirmation do not match");
       return;
     }
 
     try {
-      // Send a request to the API to reset the password
       const response = await axios.post(
-        "http://localhost:6008/api/self-reset-password",
+        "http://localhost:6008/api/change-password",
         {
           email,
+          currentPassword,
           newPassword,
+          confirmNewPassword,
         }
       );
 
       if (response.data.success) {
-        toast.success("Password has been reset successfully!");
-        // navigate("/csms/login");
+        toast.success("Password has been changed successfully!");
+        // Clear the form
         setEmail("");
+        setCurrentPassword("");
         setNewPassword("");
-        setConfirmPassword("");
+        setConfirmNewPassword("");
+        navigate("/csms/login");
       } else {
         toast.error(
-          "Email does not exist or failed to reset password. Please try again."
+          response.data.message ||
+            "Failed to change password. Please try again."
         );
       }
     } catch (error) {
@@ -49,8 +54,8 @@ export default function SelfResetPassword() {
 
   return (
     <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
+      <h2>Change Password</h2>
+      <form onSubmit={handleChangePassword}>
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -59,6 +64,17 @@ export default function SelfResetPassword() {
             className="form-control"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="currentPassword">Current Password</label>
+          <input
+            type="password"
+            id="currentPassword"
+            className="form-control"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
             required
           />
         </div>
@@ -74,28 +90,28 @@ export default function SelfResetPassword() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm New Password</label>
+          <label htmlFor="confirmNewPassword">Confirm New Password</label>
           <input
             type="password"
-            id="confirmPassword"
+            id="confirmNewPassword"
             className="form-control"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmNewPassword}
+            onChange={(e) => setConfirmNewPassword(e.target.value)}
             required
           />
         </div>
         <button type="submit" className="reset-btn">
-          Reset Password
+          Change Password
         </button>
-
-        <div>
+        {/* <div>
           <Link to="/csms/login" type="submit" className="login-link">
             Proceed To Login
           </Link>
-        </div>
-
-        <ToastContainer />
+        </div> */}
       </form>
+      <ToastContainer />
     </div>
   );
-}
+};
+
+export default ChangePassword;

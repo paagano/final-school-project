@@ -16,6 +16,7 @@ import {
   AccountBookOutlined,
   RotateLeftOutlined,
   HomeOutlined,
+  SettingOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Bar, Pie, Line } from "@ant-design/charts";
 import "antd/dist/reset.css";
@@ -38,6 +39,7 @@ import CreateRole from "../../components/roles/CreateRole.jsx";
 import Logout from "../logout/Logout.jsx";
 import { UpdateUser } from "../../components/users/UpdateUser.jsx";
 import DeleteUser from "../../components/users/DeleteUser.jsx";
+import ChangePassword from "../../components/resetPassword/ChangePassword.jsx";
 
 const AdminDashboard = () => {
   const barData = [
@@ -116,7 +118,7 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="metric-card">
-            <h3>Total Cards</h3>
+            <h3>Card Types</h3>
             <div className="metric-value">4</div>
             <div className="metric-chart">
               <Pie {...pieConfig} /> {/* Pie chart */}
@@ -174,6 +176,9 @@ const AdminDashboard = () => {
         break;
       case "/csms/get-all-roles":
         setSelectedComponent(<ListRoles />);
+        break;
+      case "/csms/change-password":
+        setSelectedComponent(<ChangePassword />);
         break;
       case "/csms/create-role":
         setSelectedComponent(<CreateRole />);
@@ -306,6 +311,22 @@ const AdminDashboard = () => {
                     label: "Home",
                     icon: <HomeOutlined />,
                     key: "/",
+                  },
+                  {
+                    label: "Settings",
+                    icon: <SettingOutlined />,
+                    children: [
+                      {
+                        label: "My Profile",
+                        icon: <OrderedListOutlined />,
+                        key: "/",
+                      },
+                      {
+                        label: "Change Password",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/change-password",
+                      },
+                    ],
                   },
                   {
                     label: "Logout",

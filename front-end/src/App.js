@@ -50,6 +50,7 @@ import HOReceiveStock from "./components/orders/HOReceiveStock.jsx";
 import BranchPendingOrders from "./components/orders/BranchPendingOrders.jsx";
 import HOPendingOrders from "./components/orders/HOPendingOrders.jsx";
 import BranchOrders from "./components/orders/BranchOrders.jsx";
+import ChangePassword from "./components/resetPassword/ChangePassword.jsx";
 // import "antd/dist/antd.css";
 
 function App() {
@@ -120,6 +121,10 @@ function App() {
         <Route
           path="/csms/self-reset-password"
           element={<SelfResetPassword />}
+        />
+        <Route
+          path="/csms/change-password"
+          element={<ChangePassword />}
         />
         <Route path="/csms/logout" element={<Logout />} />
         {/* Catch-all route for undefined paths */}

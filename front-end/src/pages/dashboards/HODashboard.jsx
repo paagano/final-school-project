@@ -9,6 +9,7 @@ import {
   CreditCardOutlined,
   HomeOutlined,
   LockOutlined,
+  SettingOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Bar, Pie, Line } from "@ant-design/charts";
 import "antd/dist/reset.css";
@@ -33,6 +34,7 @@ import HOMakeOrder from "../../components/orders/HOMakeorder.jsx";
 import HOReceiveStock from "../../components/orders/HOReceiveStock.jsx";
 import BranchPendingOrders from "../../components/orders/BranchPendingOrders.jsx";
 import HOPendingOrders from "../../components/orders/HOPendingOrders.jsx";
+import ChangePassword from "../../components/resetPassword/ChangePassword.jsx";
 
 const HODashboard = () => {
   // Branch-Admin-focused dummy data for charts
@@ -157,6 +159,9 @@ const HODashboard = () => {
       case "/csms/get-spoilt-cards":
         setSelectedComponent(<AllSpoiltCards />);
         break;
+      case "/csms/change-password":
+        setSelectedComponent(<ChangePassword />);
+        break;
       case "/csms/logout":
         setSelectedComponent(<Logout />);
         break;
@@ -253,6 +258,22 @@ const HODashboard = () => {
                     label: "Home",
                     icon: <HomeOutlined />,
                     key: "/",
+                  },
+                  {
+                    label: "Settings",
+                    icon: <SettingOutlined />,
+                    children: [
+                      {
+                        label: "My Profile",
+                        icon: <OrderedListOutlined />,
+                        key: "/",
+                      },
+                      {
+                        label: "Change Password",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/change-password",
+                      },
+                    ],
                   },
                   {
                     label: "Logout",

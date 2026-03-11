@@ -16,7 +16,7 @@ const Logout = () => {
   const handleCancel = () => {
     navigate("/");
     toast.warning(
-      "LOGOUT CANCELLED. Click on CONTINUE WORKING to go back to your dashboard",
+      "LOGOUT ACTION CANCELLED. Click on CONTINUE WORKING to go back to your dashboard",
       {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 12000,

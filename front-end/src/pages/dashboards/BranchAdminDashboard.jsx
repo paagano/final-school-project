@@ -10,6 +10,7 @@ import {
   RotateLeftOutlined,
   HomeOutlined,
   LockOutlined,
+  SettingOutlined,
 } from "@ant-design/icons/lib/icons";
 import { Bar, Pie, Line } from "@ant-design/charts";
 import "antd/dist/reset.css";
@@ -29,6 +30,7 @@ import BranchSpoiltCards from "../cards/BranchSpoiltCards.jsx";
 import BranchAdminCaptureSpoiltCard from "../cards/BranchAdminCaptureSpoiltCard.jsx";
 import BranchTransferStock from "../../components/orders/BranchTransferStock.jsx";
 import BranchOrders from "../../components/orders/BranchOrders.jsx";
+import ChangePassword from "../../components/resetPassword/ChangePassword.jsx";
 
 const BranchAdminDashboard = () => {
   // Branch-Admin-focused dummy data for charts
@@ -157,6 +159,9 @@ const BranchAdminDashboard = () => {
       case "/csms/branch-spoilt-cards":
         setSelectedComponent(<BranchSpoiltCards />);
         break;
+      case "/csms/change-password":
+        setSelectedComponent(<ChangePassword />);
+        break;
       case "/csms/logout":
         setSelectedComponent(<Logout />);
         break;
@@ -251,6 +256,22 @@ const BranchAdminDashboard = () => {
                     label: "Home",
                     icon: <HomeOutlined />,
                     key: "/",
+                  },
+                  {
+                    label: "Settings",
+                    icon: <SettingOutlined />,
+                    children: [
+                      {
+                        label: "My Profile",
+                        icon: <OrderedListOutlined />,
+                        key: "/",
+                      },
+                      {
+                        label: "Change Password",
+                        icon: <OrderedListOutlined />,
+                        key: "/csms/change-password",
+                      },
+                    ],
                   },
                   {
                     label: "Logout",
